@@ -2,4 +2,25 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 57px);
+}
+
+.sidebar {
+    width: 15%;
+    border-style: solid;
+    border-color: rgb(227, 227, 227);
+    border-width: 0 0.2px 0 0;
+    padding: 20px;
+}
+
+.content {
+    width: 85%;
+    padding: 20px;
 }
