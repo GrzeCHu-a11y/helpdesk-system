@@ -2,4 +2,7 @@
 
 declare(strict_types=1);
 
-require_once("layout.php");
+require_once("controllers/RoutingController.php");
+
+$router = new RoutingController();
+$router->run();

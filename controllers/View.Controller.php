@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class ViewController
 {
-    public function render(): void
+    public function render(string $currPage)
     {
         require_once("layout.php");
     }
