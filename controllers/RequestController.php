@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 class RequestController
 {
     public function getParams(): string
