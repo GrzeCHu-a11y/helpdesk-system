@@ -25,3 +25,8 @@ main {
     padding: 20px;
 }
 
+
+/* bootstrap */
+#container-navbar {
+    margin-left: 0%;
+}
