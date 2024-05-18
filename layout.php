@@ -41,7 +41,6 @@
             </div>
         </div>
     </nav>
-    <div class="faf"></div>
     <!-- nav -->
 
     <main>
