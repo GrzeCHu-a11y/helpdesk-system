@@ -5,7 +5,7 @@ require_once("controllers/LoginController.php");
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $data = ["email" => $_POST["email"], "password" => $_POST["password"]];
+    $data = ["username" => $_POST["username"], "password" => $_POST["password"]];
 
     $loginController = new LoginController($data);
 }
@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <br>
         <form method="post">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" />
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" />
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">

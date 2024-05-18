@@ -12,12 +12,12 @@ class RequestController
         } else return "home";
     }
 
-    public function connect(): void
+    public function connect(): PDO
     {
         try {
             $dsn = Config::getDsn();
             $pdo = new PDO($dsn, Config::$user, Config::$pass, Config::$options);
-            echo "conn succes";
+            return $pdo;
         } catch (\PDOException $e) {
             throw new PDOException($e->getMessage());
         }

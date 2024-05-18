@@ -18,6 +18,32 @@ class LoginController
 
     private function handleLogin(): void
     {
-        $this->requestController->connect();
+        $username = $this->data["username"];
+        $password = $this->data["password"];
+
+        $pdo = $this->requestController->connect();
+
+        if ($this->validateUser($pdo, $username, $password)) {
+            session_start();
+            $_SESSION["username"] = $username;
+
+            header("Location: /?route=dashboard");
+            exit;
+        } else {
+            echo "Podany użytkownik nie istnieje";
+        }
+    }
+
+    private function validateUser(PDO $pdo, string $username, string $password): bool
+    {
+        $stm = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+        $stm->execute(["username" => $username]);
+        $user = $stm->fetch();
+
+        if ($user && password_verify($password, $user["password"])) {
+            return true;
+        }
+
+        return false;
     }
 }
