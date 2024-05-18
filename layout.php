@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">O Systemie</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center ms-auto">
                     <button type="button" class="btn btn-primary me-3">
@@ -38,6 +41,7 @@
             </div>
         </div>
     </nav>
+    <div class="faf"></div>
     <!-- nav -->
 
     <main>
@@ -60,6 +64,7 @@
                 </li>
             </ul>
         </aside>
+
         <div class="content">
             <?php require_once("pages/$currPage.php") ?>
         </div>
