@@ -7,11 +7,15 @@ class Config
     public static $db = "helpdesk_system";
 
     public static $charset = 'utf8mb4';
-    public static $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
     public static $options = [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ];
+
+    public static function getDsn(): string
+    {
+        return "mysql:host=" . self::$host . ";dbname=" . self::$db . ";charset=" . self::$charset;
+    }
 }
