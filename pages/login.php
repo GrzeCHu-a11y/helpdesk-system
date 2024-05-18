@@ -1,3 +1,16 @@
+<?php
+
+declare(strict_types=1);
+require_once("controllers/LoginController.php");
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $data = ["email" => $_POST["email"], "password" => $_POST["password"]];
+
+    $loginController = new LoginController($data);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,23 +24,23 @@
     <section>
         <h2>Login</h2>
         <br>
-        <form>
+        <form method="post">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" />
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" />
+                <label for="exampleInputPassword1" class="form-label">Hasło</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" />
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" checked />
                 <label class="form-check-label" for="exampleCheck1">Always sign in on this device</label>
             </div>
             <div class="text-end">
-                <button type="submit" class="btn btn-subtle me-2">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-subtle me-2">Wstecz</button>
+                <button type="submit" class="btn btn-primary">Wyślij</button>
             </div>
         </form>
     </section>
