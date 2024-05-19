@@ -5,7 +5,10 @@ require_once("controllers/LoginController.php");
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $data = ["username" => $_POST["username"], "password" => $_POST["password"]];
+    $data = [
+        "username" => filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING),
+        "password" => filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING),
+    ];
 
     $loginController = new LoginController($data);
 }
