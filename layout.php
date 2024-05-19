@@ -1,3 +1,10 @@
+<?php
+
+declare(strict_types=1);
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +24,15 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="/">
-                <img src="public/logo.png" width=" 70" />
-            </a>
+            <?php if (isset($_SESSION["username"])) : ?>
+                <a class="navbar-brand" href="/?route=dashboard">
+                    <img src="public/logo.png" width=" 70" />
+                </a>
+            <?php else : ?>
+                <a class="navbar-brand" href="/">
+                    <img src="public/logo.png" width=" 70" />
+                </a>
+            <?php endif; ?>
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -28,14 +41,21 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">O Systemie</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
-                    </li>
+                    <?php if (isset($_SESSION["username"])) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <div class="d-flex align-items-center ms-auto">
                     <button type="button" class="btn btn-default me-3">
                         <a href="/?route=login">Zaloguj</a>
                     </button>
+                    <?php if (isset($_SESSION["username"])) : ?>
+                        <button type="button" class="btn btn-default me-3">
+                            <a href="helpers/logout.php">Wyloguj</a>
+                        </button>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -43,25 +63,27 @@
     <!-- nav -->
 
     <main>
-        <aside class="sidebar">
-            <ul class="list-group border-0" style="width:100%;">
-                <li class="list-group-item">
-                    <p>Menu 0</p>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a href="#">Menu 1</a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a href="#">Menu 2</a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a href="#">Menu 3</a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a href="#">Menu 4</a>
-                </li>
-            </ul>
-        </aside>
+        <?php if (isset($_SESSION["username"])) : ?>
+            <aside class="sidebar">
+                <ul class="list-group border-0" style="width:100%;">
+                    <li class="list-group-item">
+                        <p>Menu 0</p>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="#">Menu 1</a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="#">Menu 2</a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="#">Menu 3</a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="#">Menu 4</a>
+                    </li>
+                </ul>
+            </aside>
+        <?php endif; ?>
 
         <div class="content">
             <?php require_once("pages/$currPage.php") ?>
