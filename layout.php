@@ -35,15 +35,19 @@ session_start();
             <?php endif; ?>
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Strona Główna</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">O Systemie</a>
-                    </li>
                     <?php if (isset($_SESSION["username"])) : ?>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/?route=tickets">Tickets</a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Strona Główna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">O Systemie</a>
                         </li>
                     <?php endif; ?>
                 </ul>
