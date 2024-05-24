@@ -2,6 +2,26 @@
 
 declare(strict_types=1);
 
+$ticketsResolved = [
+    'Monday' => 5,
+    'Tuesday' => 8,
+    'Wednesday' => 6,
+    'Thursday' => 7,
+    'Friday' => 4,
+];
+
+$issueTypes = [
+    'Network Issues' => 30,
+    'Hardware Failures' => 15,
+    'Software Bugs' => 25,
+    'User Errors' => 10,
+    'Other' => 20,
+];
+
+$ticketsDataJson = json_encode(array_values($ticketsResolved));
+$ticketsLabelsJson = json_encode(array_keys($ticketsResolved));
+$issueDataJson = json_encode(array_values($issueTypes));
+$issueLabelsJson = json_encode(array_keys($issueTypes));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,108 +30,113 @@ declare(strict_types=1);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <section>
         <h2>Panel</h2><span><?php echo $_SESSION["username"] ?></span>
         <br> <br>
-        <!-- <div class="flex-row-container"></div> -->
-
-
-
-
-
-
-
-
 
         <div class="parent">
-
-            <div class="card" id="div1">
-                <div class="card-body">
-                    <h6>Aktywne Tickety</h6>
-                    <p>344</p>
-                </div>
+            <div class="div1">
+                <h6>Rozwiązane tickety</h6>
+                <p>67</p>
+            </div>
+            <div class="div2">
+                <h6>Rozwiązane tickety</h6>
+                <p>67</p>
+            </div>
+            <div class="div3">
+                <h6>Rozwiązane tickety</h6>
+                <p>67</p>
+            </div>
+            <div class="div4">
+                <h6>Rozwiązane tickety</h6>
+                <p>67</p>
             </div>
 
-
-
-            <div class="card" id="div2">
-                <div class="card-body">
-                    <h6>Rozwiązane Tickety Przez Grupe</h6>
-                    <p>34</p>
+            <div class="div5">
+                <div class="chart-container">
+                    <h6 class="text-center">Rozwiązane Tickety w Tygodniu</h6>
+                    <canvas id="ticketsChart"></canvas>
                 </div>
             </div>
-
-
-            <div class="card" id="div3">
-                <div class="card-body">
-                    <h6>Tickety Rozwiązane Przeze Mnie</h6>
-                    <p>12</p>
+            <div class="div6">
+                <div class="chart-container">
+                    <h6 class="text-center">Najczęstsze Usterki</h6>
+                    <canvas id="issuesChart"></canvas>
                 </div>
             </div>
-
-            <ol class="list-group list-group-numbered" id="div4">
-                <h6>Ostatnia aktywność</h6>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div>Subheading</div>
-                        <p class="mb-0 fs-sm text-muted">Content for list item</p>
-                    </div>
-                    <span class="badge text-bg-primary">14</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div>Subheading</div>
-                        <p class="mb-0 fs-sm text-muted">Content for list item</p>
-                    </div>
-                    <span class="badge text-bg-primary">14</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div>Subheading</div>
-                        <p class="mb-0 fs-sm text-muted">Content for list item</p>
-                    </div>
-                    <span class="badge text-bg-primary">14</span>
-                </li>
-
-            </ol>
-            <ul class="list-group" id="div5">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img class="avatar avatar-lg" src="/images/avatar/1.jpg" alt="" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-0">John Doe</p>
-                            <p class="text-muted mb-0 fs-sm">john.doe@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge text-bg-success">Active</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img class="avatar avatar-lg" src="/images/avatar/2.jpg" alt="" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-0">Alex Ray</p>
-                            <p class="text-muted mb-0 fs-sm">alex.ray@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge text-bg-danger">Removed</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img class="avatar avatar-lg" src="/images/avatar/3.jpg" alt="" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-0">Kate Hunington</p>
-                            <p class="text-muted mb-0 fs-sm">kate.hunington@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge text-bg-warning">Awaiting</span>
-                </li>
-            </ul>
         </div>
 
     </section>
+    <script>
+        const ticketsData = <?php echo $ticketsDataJson; ?>;
+        const ticketsLabels = <?php echo $ticketsLabelsJson; ?>;
+        const issueData = <?php echo $issueDataJson; ?>;
+        const issueLabels = <?php echo $issueLabelsJson; ?>;
+
+        // Konfiguracja wykresu słupkowego
+        const ticketsCtx = document.getElementById('ticketsChart').getContext('2d');
+        const ticketsChart = new Chart(ticketsCtx, {
+            type: 'bar',
+            data: {
+                labels: ticketsLabels,
+                datasets: [{
+                    label: 'Rozwiązane Tickety',
+                    data: ticketsData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Konfiguracja wykresu radarowego
+        const issuesCtx = document.getElementById('issuesChart').getContext('2d');
+        const issuesChart = new Chart(issuesCtx, {
+            type: 'radar',
+            data: {
+                labels: issueLabels,
+                datasets: [{
+                    label: 'Najczęstsze Usterki',
+                    data: issueData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.raw;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
