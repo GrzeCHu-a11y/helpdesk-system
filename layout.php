@@ -3,6 +3,31 @@
 declare(strict_types=1);
 session_start();
 
+$asideArray =
+    [
+        "dashboard" => [
+            "wydrukuj raport" => "/?route=raport",
+            "menu d 2" => "/?route=raport",
+            "menu d 3" => "/?route=raport",
+        ],
+
+        "tickets" => [
+            "menu t 1" => "/?route=raport",
+            "menu t 2" => "/?route=raport",
+            "menu t 3" => "/?route=raport",
+        ],
+
+    ];
+
+$newAsideArrayState = [];
+
+foreach ($asideArray as $key => $value) {
+    if ($currPage == 'dashboard') {
+        $newAsideArrayState = $asideArray['dashboard'];
+    } elseif ($currPage == 'tickets') {
+        $newAsideArrayState = $asideArray['tickets'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,20 +102,11 @@ session_start();
             <aside class="sidebar">
                 <ul class="list-group border-0" style="width:100%;">
                     <li class="list-group-item">
-                        <p>Menu 0</p>
+                        <p><?php echo $currPage ?></p>
                     </li>
-                    <li class="list-group-item list-group-item-action">
-                        <a href="#">Menu 1</a>
-                    </li>
-                    <li class="list-group-item list-group-item-action">
-                        <a href="#">Menu 2</a>
-                    </li>
-                    <li class="list-group-item list-group-item-action">
-                        <a href="#">Menu 3</a>
-                    </li>
-                    <li class="list-group-item list-group-item-action">
-                        <a href="#">Menu 4</a>
-                    </li>
+                    <?php foreach ($newAsideArrayState as $key => $el) { ?>
+                        <li class="list-group-item list-group-item-action"><a class="nav-link" href="<?php echo $el ?>"><?php echo $key ?></a></li>
+                    <?php }  ?>
                 </ul>
             </aside>
         <?php endif; ?>
