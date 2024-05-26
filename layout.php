@@ -42,6 +42,9 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/?route=tickets">Tickets</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/?route=worktime">Czas pracy</a>
+                        </li>
                     <?php else : ?>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#">Strona Główna</a>
