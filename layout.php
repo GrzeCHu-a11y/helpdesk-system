@@ -40,7 +40,10 @@ session_start();
                             <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/?route=tickets">Tickets</a>
+                            <a class="nav-link" aria-current="page" href="/?route=tickets">Zgłoszenia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/?route=team">Zespół</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/?route=worktime">Czas pracy</a>

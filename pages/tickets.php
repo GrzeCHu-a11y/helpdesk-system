@@ -9,7 +9,7 @@
 
 <body>
     <section>
-        <h2>Tickets</h2>
+        <h2>Zgłoszenia</h2>
         <br><br>
         <table class="table table-hover">
             <thead>
