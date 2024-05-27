@@ -3,31 +3,9 @@
 declare(strict_types=1);
 session_start();
 
-$asideArray =
-    [
-        "dashboard" => [
-            "wydrukuj raport" => "/?route=raport",
-            "menu d 2" => "/?route=raport",
-            "menu d 3" => "/?route=raport",
-        ],
+require_once("helpers/asideArray.php");
 
-        "tickets" => [
-            "menu t 1" => "/?route=raport",
-            "menu t 2" => "/?route=raport",
-            "menu t 3" => "/?route=raport",
-        ],
 
-    ];
-
-$newAsideArrayState = [];
-
-foreach ($asideArray as $key => $value) {
-    if ($currPage == 'dashboard') {
-        $newAsideArrayState = $asideArray['dashboard'];
-    } elseif ($currPage == 'tickets') {
-        $newAsideArrayState = $asideArray['tickets'];
-    }
-}
 ?>
 
 <!DOCTYPE html>
