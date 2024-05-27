@@ -7,7 +7,7 @@ require_once("controllers/View.Controller.php");
 
 class RoutingController
 {
-    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team"];
+    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team", "ticket"];
     const HOME_PAGE = "home";
     private ViewController $view;
     private RequestController $request;
