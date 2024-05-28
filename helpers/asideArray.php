@@ -14,6 +14,12 @@ $asideArray =
             "menu t 3" => "/?route=raport",
         ],
 
+        "ticket" => [
+            "konwersacja" => "/?route=raport",
+            "pliki" => "/?route=raport",
+            "menu t 3" => "/?route=raport",
+        ],
+
         "team" => [
             "menu t 1" => "/?route=raport",
             "menu t 2" => "/?route=raport",

@@ -23,7 +23,7 @@ require_once("helpers/asideArray.php");
 
 <body>
     <!-- nav -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container" id="container-navbar">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
@@ -90,7 +90,7 @@ require_once("helpers/asideArray.php");
             </aside>
         <?php endif; ?>
 
-        <div class="content">
+        <div class="content" id="pagesContent">
             <?php require_once("pages/$currPage.php") ?>
         </div>
     </main>

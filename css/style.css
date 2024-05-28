@@ -2,7 +2,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
+    background-color: rgb(249, 249, 249);
 }
 
 main {
@@ -13,17 +13,26 @@ main {
 }
 
 .sidebar {
+    background-color: white;
     width: 15%;
     border-style: solid;
     border-color: rgb(227, 227, 227);
     border-width: 0 0.2px 0 0;
     padding: 20px;
-    height: calc(100vh - 57px);
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
 }
+
+#pagesContent {
+    margin-top: 5vh;
+}
+
 
 .content {
     width: 85%;
     padding: 30px;
+    margin-left: 15%;
 }
 
 /* bootstrap */
@@ -40,9 +49,11 @@ main {
 .div1, .div2, .div3, .div4 {
     border: 0.4px solid rgb(211, 211, 211);
     padding: 10px;
+    background-color: white;
 }
 
 .div5, .div6 {
+    background-color: white;
     grid-column: span 2;
     border: 0.4px solid rgb(211, 211, 211);
     padding: 10px;
@@ -55,4 +66,3 @@ main {
     height: 100%;
 }
 
-    
