@@ -9,9 +9,40 @@
 </head>
 
 <body>
-    <section class="container mt-5">
+    <section>
         <h2>Zgłoszenia</h2>
         <br><br>
+
+        <form class="d-flex gap-2" role="search">
+            <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="bi bi-gear"></i>
+            </button>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco
+                            deserunt aute id consequat veniam incididunt duis in sint irure nisi.
+                            Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-subtle" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-subtle bg-dark" type="submit">
+                <i class="bi bi-search text-light"></i>
+            </button>
+        </form>
+        <br><br>
+
         <table class="table table-hover align-middle">
             <thead class="table-dark">
                 <tr>
@@ -107,8 +138,10 @@
                 </tr>
             </tbody>
         </table>
-    </section>
 
+
+
+    </section>
 </body>
 
 </html>
