@@ -63,9 +63,9 @@
 
         <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here"></textarea>
 
-        <div class="d-flex flex-row w-25">
-            <button type="button" class="btn btn-success">Wyślij</button>
-            <input class="form-control" type="file" id="formFile">
+        <div class="input-group">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Button</button>
         </div>
 
     </div>

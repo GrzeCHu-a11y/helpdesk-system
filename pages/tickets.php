@@ -38,7 +38,7 @@
                                 Więcej
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Szczegóły</a></li>
+                                <li><a class="dropdown-item" href="/?route=ticket">Szczegóły</a></li>
                                 <li><a class="dropdown-item" href="#">Edytuj</a></li>
                                 <li><a class="dropdown-item" href="#">Usuń</a></li>
                             </ul>
