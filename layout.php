@@ -81,7 +81,7 @@ require_once("helpers/asideArray.php");
             <aside class="sidebar">
                 <ul class="list-group border-0" style="width:100%;">
                     <li class="list-group-item">
-                        <p><?php echo $currPage ?></p>
+                        <p>Akcje</p>
                     </li>
                     <?php foreach ($newAsideArrayState as $key => $el) { ?>
                         <li class="list-group-item list-group-item-action"><a class="nav-link" href="<?php echo $el ?>"><?php echo $key ?></a></li>

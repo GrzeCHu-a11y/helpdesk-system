@@ -19,6 +19,7 @@ main {
     border-color: rgb(227, 227, 227);
     border-width: 0 0.2px 0 0;
     padding: 20px;
+    padding-top: 10vh;
     min-height: 100vh;
     position: fixed;
     left: 0;

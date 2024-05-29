@@ -9,9 +9,9 @@ $asideArray =
         ],
 
         "tickets" => [
-            "menu t 1" => "/?route=raport",
-            "menu t 2" => "/?route=raport",
-            "menu t 3" => "/?route=raport",
+            "wszystkie zgłoszenia" => "/?route=raport",
+            "rozwiązane zgłoszenia" => "/?route=raport",
+            "usunięte zgłoszenia" => "/?route=raport",
         ],
 
         "ticket" => [
