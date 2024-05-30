@@ -23,12 +23,8 @@ require_once("helpers/asideArray.php");
 </head>
 
 <body>
-    <!-- nav -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container" id="container-navbar">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
             <?php if (isset($_SESSION["username"])) : ?>
                 <a class="navbar-brand" href="/?route=dashboard">
                     <img src="public/logo.png" width=" 70" />
@@ -38,8 +34,11 @@ require_once("helpers/asideArray.php");
                     <img src="public/logo.png" width=" 70" />
                 </a>
             <?php endif; ?>
-            <div class="collapse navbar-collapse" id="navbarButtonsExample">
-                <ul class="navbar-nav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav me-auto">
                     <?php if (isset($_SESSION["username"])) : ?>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
@@ -61,21 +60,21 @@ require_once("helpers/asideArray.php");
                             <a class="nav-link" aria-current="page" href="#">O Systemie</a>
                         </li>
                     <?php endif; ?>
-                </ul>
-                <div class="d-flex align-items-center ms-auto">
-                    <button type="button" class="btn btn-default me-3">
-                        <a href="/?route=login">Zaloguj</a>
-                    </button>
-                    <?php if (isset($_SESSION["username"])) : ?>
-                        <button type="button" class="btn btn-default me-3">
-                            <a href="helpers/logout.php">Wyloguj</a>
-                        </button>
-                    <?php endif; ?>
                 </div>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <button type="button" class="btn btn-default me-3">
+                    <a href="/?route=login">Zaloguj</a>
+                </button>
+                <?php if (isset($_SESSION["username"])) : ?>
+                    <button type="button" class="btn btn-default me-3">
+                        <a href="helpers/logout.php">Wyloguj</a>
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
-    <!-- nav -->
+
 
     <main>
         <?php if (isset($_SESSION["username"])) : ?>
