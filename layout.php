@@ -63,12 +63,14 @@ require_once("helpers/asideArray.php");
                 </div>
             </div>
             <div class="navbar-nav ms-auto">
-                <button type="button" class="btn btn-default me-3">
-                    <a href="/?route=login">Zaloguj</a>
-                </button>
+
                 <?php if (isset($_SESSION["username"])) : ?>
                     <button type="button" class="btn btn-default me-3">
                         <a href="helpers/logout.php">Wyloguj</a>
+                    </button>
+                <?php else : ?>
+                    <button type="button" class="btn btn-default me-3">
+                        <a href="/?route=login">Zaloguj</a>
                     </button>
                 <?php endif; ?>
             </div>
