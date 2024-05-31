@@ -65,9 +65,31 @@ require_once("helpers/asideArray.php");
             <div class="navbar-nav ms-auto">
 
                 <?php if (isset($_SESSION["username"])) : ?>
-                    <button type="button" class="btn btn-default me-3">
-                        <a href="helpers/logout.php">Wyloguj</a>
-                    </button>
+
+                    <div class="d-flex flex-row gap-4 me-8">
+                        <button class="btn btn-dark position-relative">
+                            <i class="bi bi-chat-left"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 text-bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </button>
+
+                        <div class="dropdown">
+                            <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://images.unsplash.com/photo-1593529467220-9d721ceb9a78?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>Martyna</strong>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow">
+                                <li><a class="dropdown-item" href="#">Ustawienia</a></li>
+                                <li><a class="dropdown-item" href="#">Profil</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="helpers/logout.php">Wyloguj</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
                 <?php else : ?>
                     <button type="button" class="btn btn-default me-3">
                         <a href="/?route=login">Zaloguj</a>

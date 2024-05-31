@@ -36,11 +36,6 @@ main {
     margin-left: 15%;
 }
 
-/* bootstrap */
-#container-navbar {
-    margin-left: 0%;
-}
-
 .parent {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
