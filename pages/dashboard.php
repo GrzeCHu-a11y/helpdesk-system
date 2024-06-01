@@ -3,19 +3,19 @@
 declare(strict_types=1);
 
 $ticketsResolved = [
-    'Monday' => 5,
-    'Tuesday' => 8,
-    'Wednesday' => 6,
-    'Thursday' => 7,
-    'Friday' => 4,
+    'Poniedziałek' => 5,
+    'Wtorek' => 8,
+    'Środa' => 6,
+    'Czwartek' => 7,
+    'Piątek' => 4,
 ];
 
 $issueTypes = [
-    'Network Issues' => 30,
-    'Hardware Failures' => 15,
-    'Software Bugs' => 25,
-    'User Errors' => 10,
-    'Other' => 20,
+    'Problemy z połączeniem' => 30,
+    'Problemy sprzętowe' => 15,
+    'Problemy systemowe' => 25,
+    'Błędy użytkownika' => 10,
+    'Inne' => 20,
 ];
 
 $ticketsDataJson = json_encode(array_values($ticketsResolved));
@@ -40,25 +40,25 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
 
         <div class="parent">
             <div class="div1">
-                <h6>Rozwiązane tickety</h6>
-                <p>67</p>
+                <h6>Aktywne zgłoszenia</h6>
+                <p>100</p>
             </div>
             <div class="div2">
-                <h6>Rozwiązane tickety</h6>
+                <h6>Zamknięte zgłoszenia</h6>
                 <p>67</p>
             </div>
             <div class="div3">
-                <h6>Rozwiązane tickety</h6>
-                <p>67</p>
+                <h6>Sredni czas roziwązywania zgłoszenia</h6>
+                <p>12 min 34s</p>
             </div>
             <div class="div4">
-                <h6>Rozwiązane tickety</h6>
-                <p>67</p>
+                <h6>Czas pracy dzisiaj</h6>
+                <p>4h 12m</p>
             </div>
 
             <div class="div5">
                 <div class="chart-container">
-                    <h6 class="text-center">Rozwiązane Tickety w Tygodniu</h6>
+                    <h6 class="text-center">Zamknięte zgłoszenia w Tygodniu</h6>
                     <canvas id="ticketsChart"></canvas>
                 </div>
             </div>
@@ -84,7 +84,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
             data: {
                 labels: ticketsLabels,
                 datasets: [{
-                    label: 'Rozwiązane Tickety',
+                    label: 'Zamknięte zgłoszenia',
                     data: ticketsData,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',

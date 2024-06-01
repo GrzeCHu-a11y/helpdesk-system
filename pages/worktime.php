@@ -19,7 +19,7 @@
         <br>
         <br>
         <table class="table">
-            <thead class="table-light">
+            <thead class="table-dark">
                 <tr>
                     <th scope="col">Data</th>
                     <th scope="col">Użytkownik</th>

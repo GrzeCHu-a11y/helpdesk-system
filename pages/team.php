@@ -11,14 +11,45 @@
     <section>
         <h2>Członkowie Zespołu</h2>
         <br><br>
+
+        <form class="d-flex gap-2" role="search">
+            <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="bi bi-gear"></i>
+            </button>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco
+                            deserunt aute id consequat veniam incididunt duis in sint irure nisi.
+                            Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-subtle" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-subtle bg-dark" type="submit">
+                <i class="bi bi-search text-light"></i>
+            </button>
+        </form>
+        <br><br>
+
         <div class="table-responsive">
             <table class="table table-hover table-borderless">
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <th>Imię</th>
                         <th>Rola</th>
                         <th>Status</th>
-                        <th>Comment</th>
+                        <th>0</th>
                         <th>Akcja</th>
                     </tr>
                 </thead>
@@ -28,15 +59,15 @@
                             <span class="avatar"><i class="fas fa-user"></i></span>
                             <a href="#">George Washington</a>
                         </td>
-                        <td>None, Federalist</td>
-                        <td>1789-1797</td>
+                        <td>CEO</td>
+                        <td>Offline</td>
                         <td>0</td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#">George Washington</a>
+                                        <a class="dropdown-item" href="#">Opcja1</a>
                                     </li>
                                 </ul>
                             </div>
@@ -47,15 +78,15 @@
                             <span class="avatar"><i class="fas fa-user"></i></span>
                             <a href="#">John Adams</a>
                         </td>
-                        <td>Federalist</td>
-                        <td>1797-1801</td>
-                        <td>1</td>
+                        <td>Admin</td>
+                        <td>Online</td>
+                        <td>0</td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#">John Adams</a>
+                                        <a class="dropdown-item" href="#">Opcja1</a>
                                     </li>
                                 </ul>
                             </div>
@@ -66,15 +97,15 @@
                             <span class="avatar"><i class="fas fa-user"></i></span>
                             <a href="#">Thomas Jefferson</a>
                         </td>
-                        <td>Democratic-Republican</td>
-                        <td>1801-1809</td>
-                        <td>2</td>
+                        <td>CC</td>
+                        <td>online</td>
+                        <td>0</td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#">Thomas Jefferson</a>
+                                        <a class="dropdown-item" href="#">Opcja1</a>
                                     </li>
                                 </ul>
                             </div>

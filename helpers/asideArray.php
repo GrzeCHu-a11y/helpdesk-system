@@ -3,33 +3,32 @@
 $asideArray =
     [
         "dashboard" => [
-            "wydrukuj raport" => "/?route=raport",
-            "menu d 2" => "/?route=raport",
-            "menu d 3" => "/?route=raport",
+            "Utwórz nowy raport" => "",
+            "Raporty" => "",
+            "Utwórz nowy schemat" => "",
+            "Schematy" => "",
         ],
 
         "tickets" => [
-            "wszystkie zgłoszenia" => "/?route=raport",
-            "rozwiązane zgłoszenia" => "/?route=raport",
-            "usunięte zgłoszenia" => "/?route=raport",
+            "Wszystkie zgłoszenia" => "",
+            "Aktywne zgłoszenia" => "",
+            "Rozwiązane zgłoszenia" => "",
+            "Usunięte zgłoszenia" => "",
+            "Drukuj" => "",
         ],
 
         "ticket" => [
-            "konwersacja" => "/?route=raport",
-            "pliki" => "/?route=raport",
-            "menu t 3" => "/?route=raport",
+            "Konwersacja" => "/?route=ticket",
+            "Pliki" => "",
         ],
 
         "team" => [
-            "menu t 1" => "/?route=raport",
-            "menu t 2" => "/?route=raport",
-            "menu t 3" => "/?route=raport",
+            "Wygeneruj raport aktywności zespołu" => "",
+            // "Wygeneruj miesięczny raport pracy" => "",
         ],
 
         "worktime" => [
-            "menu t 1" => "/?route=raport",
-            "menu t 2" => "/?route=raport",
-            "menu t 3" => "/?route=raport",
+            "Drukuj" => "",
         ],
 
     ];
