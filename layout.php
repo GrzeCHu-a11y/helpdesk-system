@@ -67,12 +67,12 @@ require_once("helpers/asideArray.php");
                 <?php if (isset($_SESSION["username"])) : ?>
 
                     <div class="d-flex flex-row gap-4 me-8">
-                        <button class="btn btn-dark position-relative">
+                        <!-- <button class="btn btn-dark position-relative">
                             <i class="bi bi-chat-left"></i>
                             <span class="position-absolute top-0 start-100 translate-middle p-1 text-bg-danger border border-light rounded-circle">
                                 <span class="visually-hidden">New alerts</span>
                             </span>
-                        </button>
+                        </button> -->
 
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
