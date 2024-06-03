@@ -54,7 +54,7 @@ require_once("helpers/asideArray.php");
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Strona Główna</a>
+                            <a class="nav-link" aria-current="page" href="/">Strona Główna</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#">O Systemie</a>
@@ -91,8 +91,8 @@ require_once("helpers/asideArray.php");
                     </div>
 
                 <?php else : ?>
-                    <button type="button" class="btn btn-default me-3">
-                        <a href="/?route=login">Zaloguj</a>
+                    <button type="button" class="btn btn-dark me-3">
+                        <a class="text-white text-decoration-none" href="/?route=login">Zaloguj</a>
                     </button>
                 <?php endif; ?>
             </div>
@@ -100,7 +100,7 @@ require_once("helpers/asideArray.php");
     </nav>
 
 
-    <main>
+    <main class="<?php echo isset($_SESSION["username"]) ? "main" : "main-full"; ?>">
         <?php if (isset($_SESSION["username"])) : ?>
             <aside class="sidebar">
                 <ul class="list-group border-0" style="width:100%;">
@@ -114,7 +114,7 @@ require_once("helpers/asideArray.php");
             </aside>
         <?php endif; ?>
 
-        <div class="content" id="pagesContent">
+        <div class="<?php echo isset($_SESSION["username"]) ? "content" : "content-full"; ?>" id="pagesContent">
             <?php require_once("pages/$currPage.php") ?>
         </div>
     </main>

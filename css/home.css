@@ -1,0 +1,28 @@
+.hero {
+    background-size: cover;
+    color: black;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.section {
+    padding: 60px 0;
+}
+
+.section h2 {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.features .feature {
+    margin-bottom: 30px;
+}

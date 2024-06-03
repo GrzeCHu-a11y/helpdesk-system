@@ -1,15 +1,27 @@
 body {
+    height: auto;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     background-color: rgb(249, 249, 249);
+    /* font-family: Arial, sans-serif; */
 }
 
-main {
+.main {
     width: 100%;
     display: flex;
     flex-direction: row;
     height: auto;
+    margin-top: 5vh;
+}
+
+.main-full {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin-top: 10vh;
+    padding: 2%;
 }
 
 .sidebar {
@@ -25,15 +37,17 @@ main {
     left: 0;
 }
 
-#pagesContent {
-    margin-top: 5vh;
-}
-
 
 .content {
     width: 85%;
     padding: 30px;
     margin-left: 15%;
+}
+
+.content-full {
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .parent {
