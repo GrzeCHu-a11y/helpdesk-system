@@ -115,7 +115,18 @@ require_once("helpers/asideArray.php");
         <?php endif; ?>
 
         <div class="<?php echo isset($_SESSION["username"]) ? "content" : "content-full"; ?>" id="pagesContent">
-            <?php require_once("pages/$currPage.php") ?>
+            <?php
+
+            $fileMainPage = "pages/main/$currPage.php";
+            $fileSubPage = "pages/sub/$currPage.php";
+
+            if (file_exists($fileMainPage)) {
+                require_once("pages/main/$currPage.php");
+            } elseif (file_exists($fileSubPage)) {
+                require_once("pages/sub/$currPage.php");
+            }
+            ?>
+
         </div>
     </main>
 

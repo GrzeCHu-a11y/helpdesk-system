@@ -7,7 +7,8 @@ require_once("controllers/View.Controller.php");
 
 class RoutingController
 {
-    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team", "ticket"];
+    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team"];
+    const SUB_PAGES_ARRAY = ["ticket"];
     const HOME_PAGE = "home";
     private ViewController $view;
     private RequestController $request;
@@ -28,7 +29,7 @@ class RoutingController
 
     public function determineRoute(string $currRoute = self::HOME_PAGE): string
     {
-        if (in_array($currRoute, self::PAGES_ARRAY, true)) {
+        if (in_array($currRoute, array_merge(self::PAGES_ARRAY, self::SUB_PAGES_ARRAY))) {
             return $currRoute;
         }
         return self::HOME_PAGE;
