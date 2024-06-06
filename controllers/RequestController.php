@@ -1,7 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Controllers;
+
+use DBconfig\Config;
+use PDO;
+use PDOException;
+
 require_once("db/dbconfig.php");
+
+
 
 class RequestController
 {

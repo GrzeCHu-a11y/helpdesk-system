@@ -2,8 +2,15 @@
 
 declare(strict_types=1);
 
+namespace Controllers;
+
+use Controllers\RequestController;
+use Controllers\ViewController;
+
 require_once("controllers/RequestController.php");
 require_once("controllers/View.Controller.php");
+
+
 
 class RoutingController
 {

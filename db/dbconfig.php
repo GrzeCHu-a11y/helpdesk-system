@@ -1,4 +1,10 @@
 <?php
+
+namespace DBconfig;
+
+use PDO;
+
+
 class Config
 {
     public static $host = "localhost";

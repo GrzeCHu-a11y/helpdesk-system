@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use Controllers\RegisterController;
+
 require_once("controllers/RegisterController.php");
 
 

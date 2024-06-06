@@ -1,6 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Controllers;
+
+use PDO;
+
 require_once("RequestController.php");
 
 class LoginController
