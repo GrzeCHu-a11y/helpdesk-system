@@ -6,8 +6,6 @@ namespace Controllers;
 
 use PDO;
 
-require_once("RequestController.php");
-
 class LoginController
 {
     private array $data;

@@ -7,11 +7,6 @@ namespace Controllers;
 use Controllers\RequestController;
 use Controllers\ViewController;
 
-require_once("controllers/RequestController.php");
-require_once("controllers/View.Controller.php");
-
-
-
 class RoutingController
 {
     const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team"];
