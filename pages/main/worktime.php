@@ -1,3 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+use Controllers\WorktimeController;
+
+var_dump($_SESSION);
+$worktimeController = new WorktimeController();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $worktimeController->prepareParams();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +26,10 @@
         <h2>Rejestracja czasu pracy</h2>
         <br><br>
         <div class="d-flex flex-row gap-3 align-items-center">
-            <button type="button" class="btn btn-success">Start</button>
-            <button type="button" class="btn btn-danger">Stop</button>
-            <h5>00 h 00 min 00s</h5>
+            <form method="post">
+                <button type="submit" id="startBtn" class="btn btn-success" name="registerIn" value="<?php echo date("H:i") ?>">Zarejestruj wejscie</button>
+                <button type="submit" id="stopBtn" class="btn btn-danger" name="registerOut" value="<?php echo date("H:i") ?>">Zarejestruj wyjscie</button>
+            </form>
         </div>
         <br>
         <br>
@@ -56,6 +71,5 @@
     </section>
 
 </body>
-<script src="/scripts/worktime.js"></script>
 
 </html>

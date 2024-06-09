@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use Controllers\LoginController;
 
-require_once("controllers/LoginController.php");
-
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = [
