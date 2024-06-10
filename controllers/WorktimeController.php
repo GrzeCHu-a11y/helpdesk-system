@@ -21,19 +21,20 @@ class WorktimeController
             $params["date"] = $date;
 
             $_SESSION["PARAMS_FROM_WORK_FORM"] = $params;
-
-            $this->sendData();
         }
 
         if (!empty($_POST["registerOut"])) {
 
             $outTime = $_POST["registerOut"];
             $params["end"] = $outTime;
+
+            $_SESSION["PARAMS_FROM_WORK_FORM"] = $params;
+            $this->sendData();
         }
     }
 
     protected function sendData()
     {
-        var_dump($_SESSION);
+        var_dump($_SESSION["PARAMS_FROM_WORK_FORM"]);
     }
 }

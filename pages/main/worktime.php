@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Controllers\WorktimeController;
 
-var_dump($_SESSION);
 $worktimeController = new WorktimeController();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
