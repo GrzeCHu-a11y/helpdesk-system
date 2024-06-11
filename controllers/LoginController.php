@@ -43,6 +43,9 @@ class LoginController
         $stm->execute(["username" => $username]);
         $user = $stm->fetch();
 
+        //set user data to SESSION
+        $_SESSION["USER_DATA"] = $user;
+
         if ($user && password_verify($password, $user["password"])) {
             return true;
         }
