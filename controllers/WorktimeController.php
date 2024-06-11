@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
+use PDO;
 
 class WorktimeController
 {
@@ -15,7 +16,7 @@ class WorktimeController
         $this->requestController = new RequestController();
     }
 
-    public function prepareParams()
+    public function prepareParams(): void
     {
         if (!isset($_SESSION["PARAMS_FROM_WORK_FORM"])) {
             $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
@@ -51,7 +52,7 @@ class WorktimeController
         }
     }
 
-    private function sendData(array $params)
+    private function sendData(array $params): void
     {
         $uid = $_SESSION["USER_DATA"]["id"];
         $date = $params["date"];
@@ -74,5 +75,19 @@ class WorktimeController
 
         //clear session
         $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
+    }
+
+    public function downloadWorktimeData(): array
+    {
+        $uid = $_SESSION["USER_DATA"]["id"];
+
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("SELECT * FROM worktime WHERE user_id = :user_id");
+        $stm->execute([
+            ":user_id" => $uid,
+        ]);
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
     }
 }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use Controllers\RegisterController;
 
-require_once("controllers/RegisterController.php");
-
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = [
