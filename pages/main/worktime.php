@@ -3,14 +3,15 @@
 declare(strict_types=1);
 
 use Controllers\WorktimeController;
+use Controllers\DataController;
 
 $worktimeController = new WorktimeController();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $worktimeController->prepareParams();
 }
-
-$data = $worktimeController->downloadWorktimeData();
+$dataController = new DataController();
+$data = $dataController->downloadWorktimeData();
 
 ?>
 <!DOCTYPE html>
