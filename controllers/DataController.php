@@ -30,4 +30,14 @@ class DataController
 
         return $data;
     }
+
+    public function downloadUsersData(): array
+    {
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("SELECT * FROM users");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
+    }
 }

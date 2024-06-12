@@ -1,3 +1,10 @@
+<?php
+
+use Controllers\DataController;
+
+$dataController = new DataController();
+$users = $dataController->downloadUsersData();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,63 +59,27 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr>
-                        <td>
-                            <span class="avatar"><i class="fas fa-user"></i></span>
-                            <a href="#">George Washington</a>
-                        </td>
-                        <td>CEO</td>
-                        <td>Offline</td>
-                        <td>0</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Opcja1</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="avatar"><i class="fas fa-user"></i></span>
-                            <a href="#">John Adams</a>
-                        </td>
-                        <td>Admin</td>
-                        <td>Online</td>
-                        <td>0</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Opcja1</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="avatar"><i class="fas fa-user"></i></span>
-                            <a href="#">Thomas Jefferson</a>
-                        </td>
-                        <td>CC</td>
-                        <td>online</td>
-                        <td>0</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Opcja1</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php foreach ($users as $user) : ?>
+                        <tr>
+                            <td>
+                                <span class="avatar"><i class="fas fa-user"></i></span>
+                                <a href="#"><?php echo $user["username"] ?></a>
+                            </td>
+                            <td><?php echo $user["role"] ?></td>
+                            <td>Offline</td>
+                            <td>0</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Więcej</button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#">Opcja1</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
