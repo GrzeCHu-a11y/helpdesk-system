@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Exceptions\\' => array($baseDir . '/exceptions'),
     'Controllers\\' => array($baseDir . '/controllers'),
 );
