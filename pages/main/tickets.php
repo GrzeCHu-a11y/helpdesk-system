@@ -1,3 +1,12 @@
+<?php
+
+use Controllers\DataController;
+
+$dataController = new DataController;
+
+$tickets = $dataController->downloadTickets();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,91 +77,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Brak połączenia</td>
-                    <td>Julia K - Media Expert</td>
-                    <td>06.05.2024</td>
-                    <td>Usterka</td>
-                    <td>W toku</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Więcej
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/?route=ticket">Szczegóły</a></li>
-                                <li><a class="dropdown-item" href="#">Edytuj</a></li>
-                                <li><a class="dropdown-item" href="#">Usuń</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Brak połączenia</td>
-                    <td>Julia K - Media Expert</td>
-                    <td>06.05.2024</td>
-                    <td>Usterka</td>
-                    <td>W toku</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Więcej
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Szczegóły</a></li>
-                                <li><a class="dropdown-item" href="#">Edytuj</a></li>
-                                <li><a class="dropdown-item" href="#">Usuń</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Brak połączenia</td>
-                    <td>Julia K - Media Expert</td>
-                    <td>06.05.2024</td>
-                    <td>Usterka</td>
-                    <td>W toku</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Więcej
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Szczegóły</a></li>
-                                <li><a class="dropdown-item" href="#">Edytuj</a></li>
-                                <li><a class="dropdown-item" href="#">Usuń</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Brak połączenia</td>
-                    <td>Julia K - Media Expert</td>
-                    <td>06.05.2024</td>
-                    <td>Usterka</td>
-                    <td>W toku</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Więcej
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Szczegóły</a></li>
-                                <li><a class="dropdown-item" href="#">Edytuj</a></li>
-                                <li><a class="dropdown-item" href="#">Usuń</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
+                <?php foreach ($tickets as $ticket) : ?>
+                    <tr>
+                        <th scope="row"><?php echo  $ticket["id"] ?></th>
+                        <td><?php echo $ticket["name"] ?></td>
+                        <td><?php echo $ticket["requester"] ?></td>
+                        <td><?php echo $ticket["requested"] ?></td>
+                        <td><?php echo $ticket["type"] ?></td>
+                        <td><?php echo $ticket["status"] ?></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Więcej
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/?route=ticket">Szczegóły</a></li>
+                                    <li><a class="dropdown-item" href="#">Edytuj</a></li>
+                                    <li><a class="dropdown-item" href="#">Usuń</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
-
-
-
     </section>
 </body>
 

@@ -54,4 +54,17 @@ class DataController
             return $data;
         } else echo "Nie można pobrać użytkowników z bazy danych";
     }
+
+    //download tickets from database fun
+    public function downloadTickets(): array
+    {
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("SELECT * FROM tickets");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($data)) {
+            return $data;
+        } else echo "Nie można pobrać zgłoszeń";
+    }
 }
