@@ -1,10 +1,18 @@
 <?php
 
 use Controllers\DataController;
+use Controllers\TicketsController;
 
 $dataController = new DataController;
+$ticketController = new TicketsController();
 
 $tickets = $dataController->downloadTickets();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $ticketId = $_POST["delete-ticket"];
+    $ticketController->deleteTicket($ticketId);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -91,9 +99,11 @@ $tickets = $dataController->downloadTickets();
                                     Więcej
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/?route=ticket">Szczegóły</a></li>
-                                    <li><a class="dropdown-item" href="#">Edytuj</a></li>
-                                    <li><a class="dropdown-item" href="#">Usuń</a></li>
+                                    <form method="post">
+                                        <li><a class="dropdown-item" href="/?route=ticket&id=<?php echo $ticket["id"] ?>">Szczegóły</a></li>
+                                        <li><button class="dropdown-item">Usuń</button></li>
+                                        <input type="hidden" name="delete-ticket" value="<?php echo (int) $ticket["id"] ?>">
+                                    </form>
                                 </ul>
                             </div>
                         </td>
