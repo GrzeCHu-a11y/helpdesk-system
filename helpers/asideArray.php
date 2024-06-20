@@ -1,4 +1,5 @@
 <?php
+$ticketID = isset($_GET["id"]) ? $_GET["id"] : null;
 
 $asideArray =
     [
@@ -18,7 +19,6 @@ $asideArray =
         ],
 
         "ticket" => [
-            "Konwersacja" => "/?route=ticket",
             "Pliki" => "",
         ],
 
@@ -32,6 +32,10 @@ $asideArray =
         ],
 
     ];
+
+if ($ticketID) {
+    $asideArray["ticket"]["Konwersacja"] = "/?route=ticket&id=$ticketID";
+}
 
 $newAsideArrayState = [];
 

@@ -1,3 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+use Controllers\TicketsController;
+
+$ticketController = new TicketsController();
+
+//downloadTicketData
+$id = (int) $_GET["id"];
+
+$ticketData = $ticketController->downloadTicketData($id);
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,12 +24,12 @@
 </head>
 
 <body>
-    <h2>Zgłoszenie #ID 9182</h2>
+    <h2>Zgłoszenie #ID <?php echo $ticketData["id"] ?></h2>
     <br><br>
 
     <div class="d-flex flex-row align-items-center gap-4">
-        <h5>Temat: Brak Połączenia z internetem /</h5>
-        <h5>Użytkownik: Maciej Musiał - Media Expert</h5>
+        <h5>Temat: <?php echo $ticketData["name"] ?></h5>
+        <h5>Zgłoszone przez: <?php echo $ticketData["requester"] ?></h5>
 
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Opcje
