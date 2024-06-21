@@ -11,6 +11,12 @@ $id = (int) $_GET["id"];
 
 $ticketData = $ticketController->downloadTicketData($id);
 
+//sendMessage
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $data = ["ticket_id" => $id, "user_id" => $_SESSION["USER_DATA"]["id"], "message" => $_POST["message"], "username" => $_SESSION["USER_DATA"]["username"]];
+    $ticketController->sendMessageFromTicket($data);
+}
+
 
 
 ?>
@@ -91,13 +97,14 @@ $ticketData = $ticketController->downloadTicketData($id);
 
         <br>
 
-        <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here"></textarea>
+        <form method="post">
+            <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here" name="message"></textarea>
 
-        <div class="input-group">
-            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-            <button class="btn btn-dark" type="button" id="inputGroupFileAddon04">Wyślij</button>
-        </div>
-
+            <div class="input-group">
+                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                <button class="btn btn-dark" type="submit" id="inputGroupFileAddon04">Wyślij</button>
+            </div>
+        </form>
     </div>
 
 

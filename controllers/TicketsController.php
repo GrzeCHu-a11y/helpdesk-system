@@ -32,4 +32,16 @@ class TicketsController
         $data = $stm->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
+
+    public function sendMessageFromTicket(array $data): void
+    {
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("INSERT INTO tickets_messages (ticket_id, user_id, message, username) VALUES (:ticket_id, :user_id, :message, :username)");
+        $stm->execute([
+            ":ticket_id" => $data["ticket_id"],
+            ":user_id" => $data["user_id"],
+            ":message" => $data["message"],
+            ":username" => $data["username"],
+        ]);
+    }
 }
