@@ -3,9 +3,9 @@
 declare(strict_types=1);
 session_start();
 
+ob_start();
+
 require_once("helpers/asideArray.php");
-
-
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +17,7 @@ require_once("helpers/asideArray.php");
     <title>HDESK</title>
     <link href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" rel="stylesheet" integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
@@ -63,21 +61,12 @@ require_once("helpers/asideArray.php");
                 </div>
             </div>
             <div class="navbar-nav ms-auto">
-
                 <?php if (isset($_SESSION["username"])) : ?>
-
                     <div class="d-flex flex-row gap-4 me-8">
-                        <!-- <button class="btn btn-dark position-relative">
-                            <i class="bi bi-chat-left"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle p-1 text-bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
-                            </span>
-                        </button> -->
-
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://images.unsplash.com/photo-1593529467220-9d721ceb9a78?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" width="32" height="32" class="rounded-circle me-2">
-                                <strong><?php echo $_SESSION["USER_DATA"]["username"] ?></strong>
+                                <strong><?php echo htmlspecialchars($_SESSION["USER_DATA"]["username"], ENT_QUOTES); ?></strong>
                             </a>
                             <ul class="dropdown-menu text-small shadow">
                                 <li><a class="dropdown-item" href="#">Ustawienia</a></li>
@@ -89,7 +78,6 @@ require_once("helpers/asideArray.php");
                             </ul>
                         </div>
                     </div>
-
                 <?php else : ?>
                     <button type="button" class="btn btn-dark me-3">
                         <a class="text-white text-decoration-none" href="/?route=login">Zaloguj</a>
@@ -99,7 +87,6 @@ require_once("helpers/asideArray.php");
         </div>
     </nav>
 
-
     <main class="<?php echo isset($_SESSION["username"]) ? "main" : "main-full"; ?>">
         <?php if (isset($_SESSION["username"])) : ?>
             <aside class="sidebar">
@@ -108,15 +95,14 @@ require_once("helpers/asideArray.php");
                         <p>Akcje</p>
                     </li>
                     <?php foreach ($newAsideArrayState as $key => $el) { ?>
-                        <li class="list-group-item list-group-item-action"><a class="nav-link" href="<?php echo $el ?>"><?php echo $key ?></a></li>
-                    <?php }  ?>
+                        <li class="list-group-item list-group-item-action"><a class="nav-link" href="<?php echo htmlspecialchars($el, ENT_QUOTES); ?>"><?php echo htmlspecialchars($key, ENT_QUOTES); ?></a></li>
+                    <?php } ?>
                 </ul>
             </aside>
         <?php endif; ?>
 
         <div class="<?php echo isset($_SESSION["username"]) ? "content" : "content-full"; ?>" id="pagesContent">
             <?php
-
             $fileMainPage = "pages/main/$currPage.php";
             $fileSubPage = "pages/sub/$currPage.php";
 
@@ -126,7 +112,6 @@ require_once("helpers/asideArray.php");
                 require_once("pages/sub/$currPage.php");
             }
             ?>
-
         </div>
     </main>
 
@@ -134,3 +119,7 @@ require_once("helpers/asideArray.php");
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>

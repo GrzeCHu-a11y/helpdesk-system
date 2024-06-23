@@ -28,7 +28,7 @@ class TicketsController
     {
         $pdo = $this->requestController->connect();
         $stm = $pdo->prepare("SELECT * FROM tickets WHERE id = :id");
-        $stm->execute(["id" => $id]);
+        $stm->execute([":id" => $id]);
         $data = $stm->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
@@ -43,5 +43,15 @@ class TicketsController
             ":message" => $data["message"],
             ":username" => $data["username"],
         ]);
+        return;
+    }
+
+    public function downloadTicketMessages(int $id): array
+    {
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("SELECT * FROM tickets_messages WHERE ticket_id = :ticket_id");
+        $stm->execute([":ticket_id" => $id]);
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
 }
