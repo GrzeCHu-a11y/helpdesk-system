@@ -79,32 +79,33 @@ ob_end_flush();
 
     <br><br>
 
-    <div class="d-flex flex-column gap-5 bg-light">
+    <div class="d-flex flex-column gap-5 bg-light" id="messageContainer">
         <?php foreach ($ticketMessages as $row) : ?>
             <div class="card">
-                <div class="card-header d-flex align-items-center">
+                <div class="card-header d-flex align-items-center ">
                     <span class="avatar text-bg-primary avatar-lg fs-5">R</span>
                     <div class="ms-3">
-                        <h6 class="mb-0 fs-sm"><?php echo htmlspecialchars($row["username"], ENT_QUOTES); ?></h6>
-                        <span class="text-muted fs-sm"><?php echo htmlspecialchars($row["created_at"], ENT_QUOTES); ?></span>
+                        <h6 class="mb-0 fs-sm"><?php echo htmlspecialchars($row["username"], ENT_QUOTES, 'UTF-8'); ?></h6>
+                        <span class="text-muted fs-sm"><?php echo htmlspecialchars($row["created_at"], ENT_QUOTES, 'UTF-8'); ?></span>
                     </div>
                     <button class="btn text-muted ms-auto" type="btn"><i class="fas fa-ellipsis-v"></i></button>
                 </div>
                 <div class="card-body">
-                    <?php echo htmlspecialchars($row["message"], ENT_QUOTES); ?>
+                    <?php echo htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8'); ?>
                 </div>
             </div>
         <?php endforeach; ?>
+    </div>
 
-        <br>
+    <br>
 
-        <form method="post">
-            <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here" name="message"></textarea>
-            <div class="input-group">
-                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                <button class="btn btn-dark" type="submit" id="inputGroupFileAddon04">Wyślij</button>
-            </div>
-        </form>
+    <form method="post">
+        <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here" name="message"></textarea>
+        <div class="input-group">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button class="btn btn-dark" type="submit" id="inputGroupFileAddon04">Wyślij</button>
+        </div>
+    </form>
     </div>
 </body>
 
