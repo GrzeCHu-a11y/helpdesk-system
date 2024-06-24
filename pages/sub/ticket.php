@@ -4,55 +4,70 @@ declare(strict_types=1);
 
 use Controllers\TicketsController;
 
-ob_start();
+require_once 'controllers/TicketsController.php';
 
 $ticketController = new TicketsController();
 
-// Get ticket info
-$id = (int)$_GET["id"];
-$ticketData = $ticketController->downloadTicketData($id);
+// Sprawdzenie żądania AJAX
+if (isset($_GET['ajax']) && $_GET['ajax'] == '1') {
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// Send message system
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["message"])) {
-    if (!empty($_POST["message"])) {
+    if ($id > 0) {
+        try {
+            $messages = $ticketController->downloadTicketMessages($id);
+            header('Content-Type: application/json');
+            echo json_encode($messages);
+        } catch (Exception $e) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'An error occurred while fetching messages.']);
+        }
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'Invalid ticket ID']);
+    }
+    exit();
+}
+
+// Pobierz ID biletu
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+// Obsługa wysyłania wiadomości
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['message'])) {
         $data = [
-            "ticket_id" => $id,
-            "user_id" => $_SESSION["USER_DATA"]["id"],
-            "message" => $_POST["message"],
-            "username" => $_SESSION["USER_DATA"]["username"]
+            'ticket_id' => $id,
+            'user_id' => $_SESSION['USER_DATA']['id'],
+            'message' => $_POST['message'],
+            'username' => $_SESSION['USER_DATA']['username']
         ];
         $ticketController->sendMessageFromTicket($data);
-
-        header("Location: /?route=ticket&id=$id");
+        header("Location: ?route=ticket&id=$id");
         exit();
     }
 }
 
-// Download messages
+// Pobierz dane biletu i wiadomości
+$ticketData = $ticketController->downloadTicketData($id);
 $ticketMessages = $ticketController->downloadTicketMessages($id);
 
-ob_end_flush();
-
-// Can help for future errors 
-// ob_end_clean();
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Details</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <h2>Zgłoszenie #ID <?php echo htmlspecialchars((string)$ticketData["id"], ENT_QUOTES); ?></h2>
+    <h2>Zgłoszenie #ID <?php echo htmlspecialchars((string)$ticketData['id']); ?></h2>
     <br><br>
 
     <div class="d-flex flex-row align-items-center gap-4">
-        <h5>Temat: <?php echo htmlspecialchars($ticketData["name"], ENT_QUOTES); ?></h5>
-        <h5>Zgłoszone przez: <?php echo htmlspecialchars($ticketData["requester"], ENT_QUOTES); ?></h5>
+        <h5>Temat: <?php echo htmlspecialchars($ticketData['name']); ?></h5>
+        <h5>Zgłoszone przez: <?php echo htmlspecialchars($ticketData['requester']); ?></h5>
 
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Opcje
@@ -79,34 +94,75 @@ ob_end_flush();
 
     <br><br>
 
-    <div class="d-flex flex-column gap-5 bg-light" id="messageContainer">
+    <div class="d-flex flex-column gap-5 bg-light" id="messagesContainer">
         <?php foreach ($ticketMessages as $row) : ?>
             <div class="card">
                 <div class="card-header d-flex align-items-center ">
                     <span class="avatar text-bg-primary avatar-lg fs-5">R</span>
                     <div class="ms-3">
-                        <h6 class="mb-0 fs-sm"><?php echo htmlspecialchars($row["username"], ENT_QUOTES, 'UTF-8'); ?></h6>
-                        <span class="text-muted fs-sm"><?php echo htmlspecialchars($row["created_at"], ENT_QUOTES, 'UTF-8'); ?></span>
+                        <h6 class="mb-0 fs-sm"><?php echo htmlspecialchars($row['username']); ?></h6>
+                        <span class="text-muted fs-sm"><?php echo htmlspecialchars($row['created_at']); ?></span>
                     </div>
                     <button class="btn text-muted ms-auto" type="btn"><i class="fas fa-ellipsis-v"></i></button>
                 </div>
                 <div class="card-body">
-                    <?php echo htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8'); ?>
+                    <?php echo htmlspecialchars($row['message']); ?>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
-
     <br>
 
     <form method="post">
         <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here" name="message"></textarea>
+
         <div class="input-group">
             <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
             <button class="btn btn-dark" type="submit" id="inputGroupFileAddon04">Wyślij</button>
         </div>
     </form>
-    </div>
+
+
+    <script>
+        async function fetchMessages() {
+            try {
+                const response = await fetch(`?route=ticket&id=<?php echo $id; ?>&ajax=1`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                if (data.error) {
+                    console.error('Error fetching messages:', data.error);
+                } else {
+                    const messagesContainer = document.getElementById('messagesContainer');
+                    messagesContainer.innerHTML = ''; // Clear current messages
+                    data.forEach(row => {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.classList.add('card');
+                        messageDiv.innerHTML = `
+                            <div class="card-header d-flex align-items-center">
+                                <span class="avatar text-bg-primary avatar-lg fs-5">R</span>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 fs-sm">${row.username}</h6>
+                                    <span class="text-muted fs-sm">${row.created_at}</span>
+                                </div>
+                                <button class="btn text-muted ms-auto" type="btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                            <div class="card-body">
+                                ${row.message}
+                            </div>
+                        `;
+                        messagesContainer.appendChild(messageDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        }
+
+        // Odświeżaj wiadomości co 5 sekund
+        setInterval(fetchMessages, 5000);
+    </script>
 </body>
 
 </html>
