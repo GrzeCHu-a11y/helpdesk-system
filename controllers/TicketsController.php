@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
-use Controllers\RoutingController;
 use PDO;
 
 class TicketsController
