@@ -8,25 +8,6 @@ require_once 'controllers/TicketsController.php';
 
 $ticketController = new TicketsController();
 
-// Sprawdzenie żądania AJAX
-if (isset($_GET['ajax']) && $_GET['ajax'] == '1') {
-    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-
-    if ($id > 0) {
-        try {
-            $messages = $ticketController->downloadTicketMessages($id);
-            header('Content-Type: application/json');
-            echo json_encode($messages);
-        } catch (Exception $e) {
-            header('Content-Type: application/json');
-            echo json_encode(['error' => 'An error occurred while fetching messages.']);
-        }
-    } else {
-        header('Content-Type: application/json');
-        echo json_encode(['error' => 'Invalid ticket ID']);
-    }
-    exit();
-}
 
 // Pobierz ID biletu
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
