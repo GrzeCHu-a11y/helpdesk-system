@@ -11,12 +11,27 @@ class RegisterController
     private array $data;
     private RequestController $requestController;
 
-    public function __construct(array $data)
+    public function __construct()
     {
         $this->requestController = new RequestController();
+        $this->handleRegister();
+    }
 
-        $this->data = $data;
-        $this->registerUser();
+    private function handleRegister()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $data = [
+                "username" => filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING),
+                "password" => filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING),
+                "email" => filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL),
+                "role" => filter_input(INPUT_POST, "role", FILTER_SANITIZE_STRING),
+            ];
+
+            if (!empty($data)) {
+                $this->data = $data;
+                $this->registerUser();
+            }
+        }
     }
 
     private function registerUser(): void

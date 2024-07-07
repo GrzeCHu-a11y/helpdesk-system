@@ -4,19 +4,7 @@ declare(strict_types=1);
 
 use Controllers\RegisterController;
 
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $data = [
-        "username" => filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING),
-        "password" => filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING),
-        "email" => filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL),
-        "role" => filter_input(INPUT_POST, "role", FILTER_SANITIZE_STRING),
-    ];
-
-    $registerController = new RegisterController($data);
-}
-
-
+$registerController = new RegisterController();
 
 ?>
 <!DOCTYPE html>
