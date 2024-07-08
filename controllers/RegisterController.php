@@ -17,7 +17,7 @@ class RegisterController
         $this->handleRegister();
     }
 
-    private function handleRegister()
+    private function handleRegister(): void
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $data = [

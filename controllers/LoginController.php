@@ -11,15 +11,28 @@ class LoginController
     private array $data;
     private RequestController $requestController;
 
-    public function __construct(array $data)
+    public function __construct()
     {
         $this->requestController = new RequestController();
-
-        $this->data = $data;
         $this->handleLogin();
     }
 
     private function handleLogin(): void
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $data = [
+                "username" => filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING),
+                "password" => filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING),
+            ];
+
+            if (!empty($data)) {
+                $this->data = $data;
+                $this->login();
+            }
+        }
+    }
+
+    private function login(): void
     {
         $username = $this->data["username"];
         $password = $this->data["password"];

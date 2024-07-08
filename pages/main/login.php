@@ -4,15 +4,7 @@ declare(strict_types=1);
 
 use Controllers\LoginController;
 
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $data = [
-        "username" => filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING),
-        "password" => filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING),
-    ];
-
-    $loginController = new LoginController($data);
-}
+$loginController = new LoginController();
 
 ?>
 <!DOCTYPE html>
@@ -40,10 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <label for="exampleInputPassword1" class="form-label">Hasło</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" name="password" />
                 </div>
-                <!-- <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" checked />
-                    <label class="form-check-label" for="exampleCheck1">Always sign in on this device</label>
-                </div> -->
                 <div class="text-end">
                     <button type="submit" class="btn btn-dark me-2"><a class="text-white text-decoration-none" href="/">Wstecz</a></button>
                     <button type="submit" class="btn btn-dark">Zaloguj</button>
