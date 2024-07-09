@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
-use Controllers\RoutingController;
 use PDO;
+use PDOException;
 
 class TicketsController
 {
@@ -15,13 +15,38 @@ class TicketsController
     public function __construct()
     {
         $this->requestController = new RequestController();
+        $this->handleAction();
     }
 
-    public function deleteTicket(int $id): void
+    private function handleAction(): void
+    {
+        // handle delete ticket 
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete-ticket"])) {
+            $ticketId = (int) $_POST["delete-ticket"];
+            if (!empty($ticketId)) {
+                $this->deleteTicket($ticketId);
+            } else return;
+        }
+    }
+
+    private function deleteTicket(int $ticket_id): void
     {
         $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("DELETE FROM tickets WHERE id = :id");
-        $stm->execute(["id" => $id]);
+        $pdo->beginTransaction();
+
+        try {
+            $stm = $pdo->prepare("DELETE FROM tickets_messages WHERE ticket_id = :ticket_id");
+            $stm->execute([":ticket_id" => $ticket_id]);
+
+            $stm = $pdo->prepare("DELETE FROM tickets WHERE id = :ticket_id");
+            $stm->execute([":ticket_id" => $ticket_id]);
+
+            $pdo->commit();
+            echo "Rekord został pomyślnie usunięty.";
+        } catch (PDOException $e) {
+            $pdo->rollBack();
+            echo "Błąd przy usuwaniu rekordu: " . $e->getMessage();
+        }
     }
 
     public function downloadTicketData(int $id): array

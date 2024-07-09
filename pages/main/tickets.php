@@ -3,16 +3,10 @@
 use Controllers\DataController;
 use Controllers\TicketsController;
 
-$dataController = new DataController;
+$dataController = new DataController();
 $ticketController = new TicketsController();
 
 $tickets = $dataController->downloadTickets();
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $ticketId = $_POST["delete-ticket"];
-    $ticketController->deleteTicket($ticketId);
-}
-
 
 ?>
 <!DOCTYPE html>
