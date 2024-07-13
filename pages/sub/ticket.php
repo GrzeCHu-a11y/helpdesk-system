@@ -9,7 +9,7 @@ require_once 'controllers/TicketsController.php';
 $ticketController = new TicketsController();
 
 
-// Pobierz ID biletu
+// Pobierz ID ticketu
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 // Obsługa wysyłania wiadomości
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Pobierz dane biletu i wiadomości
+// Pobierz dane ticketu i wiadomości
 $ticketData = $ticketController->downloadTicketData($id);
 $ticketMessages = $ticketController->downloadTicketMessages($id);
 
@@ -43,12 +43,12 @@ $ticketMessages = $ticketController->downloadTicketMessages($id);
 </head>
 
 <body>
-    <h2>Zgłoszenie #ID <?php echo htmlspecialchars((string)$ticketData['id']); ?></h2>
+    <h2>Zgłoszenie #ID <?php echo $ticketData['id']; ?></h2>
     <br><br>
 
     <div class="d-flex flex-row align-items-center gap-4">
-        <h5>Temat: <?php echo htmlspecialchars($ticketData['name']); ?></h5>
-        <h5>Zgłoszone przez: <?php echo htmlspecialchars($ticketData['requester']); ?></h5>
+        <h5>Temat: <?php echo $ticketData['name']; ?></h5>
+        <h5>Zgłoszone przez: <?php echo $ticketData['requester']; ?></h5>
 
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Opcje

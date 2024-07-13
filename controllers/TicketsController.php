@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
+use Exceptions\DeleteTicketException;
+use Exceptions\DownloadTicketDataException;
 use PDO;
-use PDOException;
+
 
 class TicketsController
 {
@@ -43,7 +45,7 @@ class TicketsController
 
             $pdo->commit();
             echo "Rekord został pomyślnie usunięty.";
-        } catch (PDOException $e) {
+        } catch (DeleteTicketException $e) {
             $pdo->rollBack();
             echo "Błąd przy usuwaniu rekordu: " . $e->getMessage();
         }
@@ -52,10 +54,21 @@ class TicketsController
     public function downloadTicketData(int $id): array
     {
         $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("SELECT * FROM tickets WHERE id = :id");
-        $stm->execute([":id" => $id]);
-        $data = $stm->fetch(PDO::FETCH_ASSOC);
-        return $data;
+
+        try {
+            $stm = $pdo->prepare("SELECT * FROM tickets WHERE id = :id");
+            $stm->execute([":id" => $id]);
+            $data = $stm->fetch(PDO::FETCH_ASSOC);
+
+            if ($data !== false && $data["id"] > 0) {
+                return $data;
+            } else {
+                throw new DownloadTicketDataException;
+            }
+        } catch (DownloadTicketDataException $e) {
+            echo $e->getMessage();
+            return $data = ["id" => 0, "name" => "BŁĄD", "requester" => "BŁĄD"];
+        }
     }
 
     public function sendMessageFromTicket(array $data): void
@@ -74,9 +87,19 @@ class TicketsController
     public function downloadTicketMessages(int $id): array
     {
         $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("SELECT * FROM tickets_messages WHERE ticket_id = :ticket_id");
-        $stm->execute([":ticket_id" => $id]);
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+
+        try {
+            $stm = $pdo->prepare("SELECT * FROM tickets_messages WHERE ticket_id = :ticket_id");
+            $stm->execute([":ticket_id" => $id]);
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($data)) {
+                echo "brak wiadomosci";
+            }
+
+            return $data;
+        } catch (\Throwable $th) {
+            echo "błąd przy pobieraniu wiadomosci" .  $th->getMessage();
+        }
     }
 }
