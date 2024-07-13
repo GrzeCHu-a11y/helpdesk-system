@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
+use PDOException;
 
 class WorktimeController
 {
@@ -13,9 +14,18 @@ class WorktimeController
     public function __construct()
     {
         $this->requestController = new RequestController();
+        $this->handleAction();
     }
 
-    public function prepareParams(): void
+    private function handleAction(): void
+    {
+        //prepare params for send to db
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $this->prepareParams();
+        }
+    }
+
+    private function prepareParams(): void
     {
         if (!isset($_SESSION["PARAMS_FROM_WORK_FORM"])) {
             $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
@@ -53,26 +63,29 @@ class WorktimeController
 
     private function sendData(array $params): void
     {
-        $uid = $_SESSION["USER_DATA"]["id"];
-        $date = $params["date"];
-        $username = $params["username"];
-        $start = $params["start"];
-        $end = $params["end"];
+        try {
+            $uid = $_SESSION["USER_DATA"]["id"];
+            $date = $params["date"];
+            $username = $params["username"];
+            $start = $params["start"];
+            $end = $params["end"];
 
-        $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("INSERT INTO worktime (user_id, date, username, time_start, time_end) VALUES (:user_id, :date, :username, :time_start, :time_end)");
+            $pdo = $this->requestController->connect();
+            $stm = $pdo->prepare("INSERT INTO worktime (user_id, date, username, time_start, time_end) VALUES (:user_id, :date, :username, :time_start, :time_end)");
 
-        $stm->execute([
-            ":user_id" => $uid,
-            ":date" => $date,
-            ":username" => $username,
-            ":time_start" => $start,
-            ":time_end" => $end,
-        ]);
+            $stm->execute([
+                ":user_id" => $uid,
+                ":date" => $date,
+                ":username" => $username,
+                ":time_start" => $start,
+                ":time_end" => $end,
+            ]);
 
-        echo "dane zapisane";
-
-        //clear session
-        $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
+            echo "dane zapisane";
+            //clear session
+            $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 }
