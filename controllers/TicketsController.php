@@ -29,6 +29,22 @@ class TicketsController
                 $this->deleteTicket($ticketId);
             } else return;
         }
+
+        // handle send message
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION)) {
+            if (!empty($_POST['message'])) {
+                $id = $_GET["id"];
+                $data = [
+                    'ticket_id' => $id,
+                    'user_id' => $_SESSION['USER_DATA']['id'],
+                    'message' => $_POST['message'],
+                    'username' => $_SESSION['USER_DATA']['username']
+                ];
+                $this->sendMessageFromTicket($data);
+                header("Location: ?route=ticket&id=$id");
+                exit();
+            }
+        }
     }
 
     private function deleteTicket(int $ticket_id): void

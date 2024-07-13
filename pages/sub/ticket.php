@@ -9,25 +9,10 @@ require_once 'controllers/TicketsController.php';
 $ticketController = new TicketsController();
 
 
-// Pobierz ID ticketu
+// Download ticketID from GET
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// Obsługa wysyłania wiadomości
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST['message'])) {
-        $data = [
-            'ticket_id' => $id,
-            'user_id' => $_SESSION['USER_DATA']['id'],
-            'message' => $_POST['message'],
-            'username' => $_SESSION['USER_DATA']['username']
-        ];
-        $ticketController->sendMessageFromTicket($data);
-        header("Location: ?route=ticket&id=$id");
-        exit();
-    }
-}
-
-// Pobierz dane ticketu i wiadomości
+// Download ticket data and messages
 $ticketData = $ticketController->downloadTicketData($id);
 $ticketMessages = $ticketController->downloadTicketMessages($id);
 
@@ -47,8 +32,8 @@ $ticketMessages = $ticketController->downloadTicketMessages($id);
     <br><br>
 
     <div class="d-flex flex-row align-items-center gap-4">
-        <h5>Temat: <?php echo $ticketData['name']; ?></h5>
-        <h5>Zgłoszone przez: <?php echo $ticketData['requester']; ?></h5>
+        <h5>Temat: <?php echo htmlspecialchars($ticketData['name']); ?></h5>
+        <h5>Zgłoszone przez: <?php echo htmlspecialchars($ticketData['requester']); ?></h5>
 
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Opcje
