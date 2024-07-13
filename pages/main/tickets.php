@@ -6,7 +6,7 @@ use Controllers\TicketsController;
 $dataController = new DataController();
 $ticketController = new TicketsController();
 
-$tickets = $dataController->downloadTickets();
+$tickets = $dataController->downloadTicketsData();
 
 ?>
 <!DOCTYPE html>

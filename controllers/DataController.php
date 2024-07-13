@@ -6,6 +6,9 @@ namespace Controllers;
 
 use Controllers\RequestController;
 use Exceptions\DatabaseException;
+use Exceptions\DownloadTicketDataException;
+use Exceptions\DownloadUsersDataException;
+use Exceptions\DownloadTicketsDataException;
 use PDO;
 
 class DataController
@@ -41,30 +44,41 @@ class DataController
         }
     }
 
-
-    //download users data from database fun
+    //download users data from database fun // TO DO: add LIMIT
     public function downloadUsersData(): array
     {
-        $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("SELECT * FROM users");
-        $stm->execute();
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $pdo = $this->requestController->connect();
+            $stm = $pdo->prepare("SELECT * FROM users");
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!empty($data)) {
-            return $data;
-        } else echo "Nie można pobrać użytkowników z bazy danych";
+            if (!empty($data)) {
+                return $data;
+            } else {
+                throw new DownloadUsersDataException();
+            }
+        } catch (DownloadUsersDataException $e) {
+            echo $e->getMessage();
+        }
     }
 
     //download tickets from database fun
-    public function downloadTickets(): array
+    public function downloadTicketsData(): array
     {
-        $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("SELECT * FROM tickets");
-        $stm->execute();
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $pdo = $this->requestController->connect();
+            $stm = $pdo->prepare("SELECT * FROM tickets");
+            $stm->execute();
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!empty($data)) {
-            return $data;
-        } else echo "Nie można pobrać zgłoszeń";
+            if (!empty($data)) {
+                return $data;
+            } else {
+                throw new DownloadTicketsDataException();
+            }
+        } catch (DownloadTicketDataException $e) {
+            echo $e->getMessage();
+        }
     }
 }
