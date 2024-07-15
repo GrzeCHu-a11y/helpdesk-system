@@ -9,6 +9,7 @@ use Exceptions\DatabaseException;
 use Exceptions\DownloadTicketDataException;
 use Exceptions\DownloadUsersDataException;
 use Exceptions\DownloadTicketsDataException;
+use Exceptions\GetTicketTypesException;
 use PDO;
 
 class DataController
@@ -78,6 +79,34 @@ class DataController
                 throw new DownloadTicketsDataException();
             }
         } catch (DownloadTicketDataException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function countTicketTypes(): array
+    {
+        $pdo = $this->requestController->connect();
+        $pdo->beginTransaction();
+
+        try {
+            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE type='INNE'");
+            $stm->execute();
+            $countINNE = $stm->fetchColumn();
+
+            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE type='SPRZĘT'");
+            $stm->execute();
+            $countSPRZET = $stm->fetchColumn();
+
+            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE type='INTERNET'");
+            $stm->execute();
+            $countINTERNET = $stm->fetchColumn();
+
+            $pdo->commit();
+
+            if ($countINNE && $countSPRZET && $countINTERNET >= 1) {
+                return $data = ["INNE" => $countINNE, "SPRZET" => $countSPRZET, "INTERNET" => $countINTERNET];
+            } else throw new GetTicketTypesException();
+        } catch (GetTicketTypesException $e) {
             echo $e->getMessage();
         }
     }

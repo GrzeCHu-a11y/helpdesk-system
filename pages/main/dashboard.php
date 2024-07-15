@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+use Controllers\DataController;
+
+$dataController = new DataController();
+$data = $dataController->countTicketTypes();
+
+
 $ticketsResolved = [
     'Poniedziałek' => 5,
     'Wtorek' => 8,

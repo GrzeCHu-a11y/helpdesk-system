@@ -8,7 +8,7 @@ use Exception;
 
 class DownloadTicketsDataException extends Exception
 {
-    protected function __construct()
+    public function __construct()
     {
         $this->handleErr();
     }

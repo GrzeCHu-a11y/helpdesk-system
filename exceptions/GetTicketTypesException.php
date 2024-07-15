@@ -6,7 +6,7 @@ namespace Exceptions;
 
 use Exception;
 
-class DownloadUsersDataException extends Exception
+class GetTicketTypesException extends Exception
 {
     public function __construct()
     {
@@ -15,6 +15,6 @@ class DownloadUsersDataException extends Exception
 
     private function handleErr(): void
     {
-        echo "Nie można pobrac danych użytkowników";
+        echo "Nie można pobrać typów zgłoszeń";
     }
 }
