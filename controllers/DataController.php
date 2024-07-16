@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
+use Exceptions\CountAllTicketsException;
 use Exceptions\DatabaseException;
 use Exceptions\DownloadTicketDataException;
 use Exceptions\DownloadUsersDataException;
@@ -107,6 +108,22 @@ class DataController
                 return $data = ["INNE" => $countINNE, "SPRZET" => $countSPRZET, "INTERNET" => $countINTERNET];
             } else throw new GetTicketTypesException();
         } catch (GetTicketTypesException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function countAllTickets(): int
+    {
+        try {
+            $pdo = $this->requestController->connect();
+            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets");
+            $stm->execute();
+            $count = $stm->fetchColumn();
+
+            if ($count > 0) {
+                return $count;
+            } else throw new CountAllTicketsException();
+        } catch (CountAllTicketsException $e) {
             echo $e->getMessage();
         }
     }

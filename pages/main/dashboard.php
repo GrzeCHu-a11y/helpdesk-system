@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+use Controllers\DashboardController;
 use Controllers\DataController;
 
+$dashboardController = new DashboardController();
+$issueTypes = $dashboardController->issuesChartManagement();
+
 $dataController = new DataController();
-$data = $dataController->countTicketTypes();
+$numOfAllTickets = $dataController->countAllTickets();
 
-
+//IN PROGRES
 $ticketsResolved = [
     'Poniedziałek' => 5,
     'Wtorek' => 8,
@@ -16,16 +20,10 @@ $ticketsResolved = [
     'Piątek' => 4,
 ];
 
-$issueTypes = [
-    'Problemy z połączeniem' => 30,
-    'Problemy sprzętowe' => 15,
-    'Problemy systemowe' => 25,
-    'Błędy użytkownika' => 10,
-    'Inne' => 20,
-];
-
 $ticketsDataJson = json_encode(array_values($ticketsResolved));
 $ticketsLabelsJson = json_encode(array_keys($ticketsResolved));
+//IN PROGRES
+
 $issueDataJson = json_encode(array_values($issueTypes));
 $issueLabelsJson = json_encode(array_keys($issueTypes));
 ?>
@@ -47,7 +45,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
         <div class="parent">
             <div class="div1">
                 <h6>Aktywne zgłoszenia</h6>
-                <p>100</p>
+                <p><?php echo $numOfAllTickets ?></p>
             </div>
             <div class="div2">
                 <h6>Zamknięte zgłoszenia</h6>
@@ -64,7 +62,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
 
             <div class="div5">
                 <div class="chart-container">
-                    <h6 class="text-center">Zamknięte zgłoszenia w Tygodniu</h6>
+                    <h6 class="text-center">Zamknięte zgłoszenia w Tygodniu *W BUDOWIE*</h6>
                     <canvas id="ticketsChart"></canvas>
                 </div>
             </div>
