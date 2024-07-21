@@ -45,6 +45,21 @@ class TicketsController
                 exit();
             }
         }
+
+        // handle change ticket status
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["status"])) {
+
+            $data = [
+                "status" => $_POST["status"],
+                "openedAt" => $_POST["date"],
+                "realizationTime" => $_POST["realization-time"],
+                "operatedBy" => $_POST["operated-by"],
+            ];
+
+            if (isset($data)) {
+                $this->changeTicketStatus($data);
+            }
+        }
     }
 
     private function deleteTicket(int $ticket_id): void
@@ -116,6 +131,21 @@ class TicketsController
             return $data;
         } catch (\Throwable $th) {
             echo "błąd przy pobieraniu wiadomosci" .  $th->getMessage();
+        }
+    }
+
+    private function changeTicketStatus(array $data): void
+    {
+        $id = $_GET["id"];
+        var_dump($data);
+        $pdo = $this->requestController->connect();
+        try {
+            $stm = $pdo->prepare("UPDATE tickets SET status=?, opened_at=?, realization_time=?, operated_by=? WHERE id=?");
+            $stm->execute([
+                $data["status"], $data["openedAt"], $data["realizationTime"], $data["operatedBy"], $id
+            ]);
+        } catch (\Throwable $th) {
+            echo "błąd" . $th->getMessage();
         }
     }
 }

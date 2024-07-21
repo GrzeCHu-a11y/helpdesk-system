@@ -41,18 +41,48 @@ $ticketMessages = $ticketController->downloadTicketMessages($id);
         <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium nisi nunc,
-                        sit amet tincidunt ipsum faucibus vitae. Pellentesque eget odio tristique, mattis elit id.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-subtle" data-bs-dismiss="modal">Secondary Action</button>
-                        <button type="button" class="btn btn-primary">Confirm</button>
-                    </div>
+                    <form method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Opcje</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-floating">
+                                <select name="status" class="form-select" id="floatingSelect-Status" aria-label="Floating label select example">
+                                    <option selected>Otwarto</option>
+                                    <option>W toku</option>
+                                    <option>Zamknięte</option>
+                                    <option>Do ponownej weryfikacji</option>
+                                </select>
+                                <label for="floatingSelect-Status">Zmień status zgłoszenia</label>
+                            </div>
+                            <div class="form-floating mt-5">
+                                <select name="date" class="form-select" id="floatingSelect-Date" aria-label="Floating label select example">
+                                    <option selected><?php echo date("Y-m-d"); ?></option>
+                                </select>
+                                <label for="floatingSelect-Date">Data</label>
+                            </div>
+                            <div class="form-floating mt-5">
+                                <select name="realization-time" class="form-select" id="floatingSelect-Finish" aria-label="Floating label select example">
+                                    <option>> 10min</option>
+                                    <option selected>> 30min</option>
+                                    <option>> 1h</option>
+                                    <option>> 2h</option>
+                                </select>
+                                <label for="floatingSelect-Finish">Czas Realizacji</label>
+                            </div>
+                            <div class="form-floating mt-5">
+                                <select name="operated-by" class="form-select" id="floatingSelect-FinishedBY" aria-label="Floating label select example">
+                                    <option selected><?php echo $_SESSION["USER_DATA"]["username"] ?></option>
+                                </select>
+                                <label for="floatingSelect-FinishedBY">Obsługiwane przez</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-subtle" data-bs-dismiss="modal">Wstecz</button>
+                            <button type="submitt" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
