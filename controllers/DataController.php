@@ -104,7 +104,7 @@ class DataController
 
             $pdo->commit();
 
-            if ($countINNE && $countSPRZET && $countINTERNET >= 1) {
+            if ($countINNE || $countSPRZET ||  $countINTERNET >= 1) {
                 return $data = ["INNE" => $countINNE, "SPRZET" => $countSPRZET, "INTERNET" => $countINTERNET];
             } else throw new GetTicketTypesException();
         } catch (GetTicketTypesException $e) {
