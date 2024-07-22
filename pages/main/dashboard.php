@@ -10,6 +10,7 @@ $issueTypes = $dashboardController->issuesChartManagement();
 
 $dataController = new DataController();
 $numOfAllTickets = $dataController->countAllTickets();
+$numOfClosedTickets =  $dataController->countClosedTickets();
 
 //IN PROGRES
 $ticketsResolved = [
@@ -49,7 +50,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
             </div>
             <div class="div2">
                 <h6>Zamknięte zgłoszenia</h6>
-                <p>67</p>
+                <p><?php echo $numOfClosedTickets ?></p>
             </div>
             <div class="div3">
                 <h6>Sredni czas roziwązywania zgłoszenia</h6>

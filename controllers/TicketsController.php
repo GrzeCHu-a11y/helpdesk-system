@@ -137,7 +137,6 @@ class TicketsController
     private function changeTicketStatus(array $data): void
     {
         $id = $_GET["id"];
-        var_dump($data);
         $pdo = $this->requestController->connect();
         try {
             $stm = $pdo->prepare("UPDATE tickets SET status=?, opened_at=?, realization_time=?, operated_by=? WHERE id=?");
@@ -145,7 +144,7 @@ class TicketsController
                 $data["status"], $data["openedAt"], $data["realizationTime"], $data["operatedBy"], $id
             ]);
         } catch (\Throwable $th) {
-            echo "błąd" . $th->getMessage();
+            echo "błąd przy zmianie statusu zgloszenia" . $th->getMessage();
         }
     }
 }

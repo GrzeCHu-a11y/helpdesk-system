@@ -127,4 +127,20 @@ class DataController
             echo $e->getMessage();
         }
     }
+
+    public function countClosedTickets(): int
+    {
+        try {
+            $pdo = $this->requestController->connect();
+            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE status='Zamknięte'");
+            $stm->execute();
+            $count = $stm->fetchColumn();
+
+            if ($count > 0) {
+                return $count;
+            } else throw new CountAllTicketsException();
+        } catch (CountAllTicketsException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

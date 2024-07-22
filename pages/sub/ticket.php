@@ -69,7 +69,7 @@ $ticketMessages = $ticketController->downloadTicketMessages($id);
                                     <option>> 1h</option>
                                     <option>> 2h</option>
                                 </select>
-                                <label for="floatingSelect-Finish">Czas Realizacji</label>
+                                <label for="floatingSelect-Finish">Określ przewidywany czas realizacji</label>
                             </div>
                             <div class="form-floating mt-5">
                                 <select name="operated-by" class="form-select" id="floatingSelect-FinishedBY" aria-label="Floating label select example">
