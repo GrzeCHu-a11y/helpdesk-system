@@ -8,6 +8,10 @@ $ticketController = new TicketsController();
 
 $tickets = $dataController->downloadTicketsData();
 
+if (isset($_POST["add"])) {
+    echo "add ticket";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,11 +28,65 @@ $tickets = $dataController->downloadTicketsData();
         <h2>Zgłoszenia</h2>
         <br><br>
 
-        <form class="d-flex gap-2" role="search">
+        <form class="d-flex gap-2" method="post">
             <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
+            <button class="btn btn-subtle bg-dark" type="submit">
+                <i class="bi bi-search text-light"></i>
+            </button>
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <i class="bi bi-gear"></i>
             </button>
+
+            <!-- modal for add ticket -->
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-plus-circle"></i>
+            </button>
+            <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Dodaj nowe zgłoszenie</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-wrap gap-5">
+                                <input type="text" class="form-control flex-grow-1" placeholder="ID - AUTO" aria-label="ID" aria-describedby="basic-addon1" disabled />
+                                <input name="subject-addTicket" type="text" class="form-control flex-grow-1" placeholder="Temat" aria-label="Temat" aria-describedby="basic-addon1" />
+                                <label for="date">Wybierz datę</label>
+                                <input name="date-addTicket" class="form-control flex-grow-1" type="date" id="date">
+
+                                <label for="user">Zgłaszający</label>
+                                <input name="user-addTicket" class="form-control flex-grow-1" type="text" id="user" readonly value="<?php echo $_SESSION["USER_DATA"]["username"] ?>">
+                                <div class="form-floating">
+                                    <select name="status-addTicket" class="form-select" id="floatingSelect-Status" aria-label="Floating label select example">
+                                        <option selected>Otwarto</option>
+                                        <option>W toku</option>
+                                        <option>Zamknięte</option>
+                                        <option>Do ponownej weryfikacji</option>
+                                    </select>
+                                    <label for="floatingSelect-Status">Poadaj status zgłoszenia</label>
+                                </div>
+                                <div class="form-floating">
+                                    <select name="type-addTicket" class="form-select" id="floatingSelect-Type" aria-label="Floating label select example">
+                                        <option selected>INNE</option>
+                                        <option>INTERNET</option>
+                                        <option>SPRZĘT</option>
+                                    </select>
+                                    <label for="floatingSelect-Type">Podaj typ zgłoszenia</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-subtle" data-bs-dismiss="modal">Wstecz</button>
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal for add ticket -->
+
+            <!-- modal for filtering tickets -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -60,9 +118,7 @@ $tickets = $dataController->downloadTicketsData();
                     </div>
                 </div>
             </div>
-            <button class="btn btn-subtle bg-dark" type="submit">
-                <i class="bi bi-search text-light"></i>
-            </button>
+            <!-- modal for filtering tickets -->
         </form>
         <br><br>
 

@@ -47,7 +47,7 @@ class TicketsController
         }
 
         // handle change ticket status
-        if ($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["status"])) {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["status"]) && isset($_GET["id"])) {
 
             $data = [
                 "status" => $_POST["status"],
@@ -58,6 +58,20 @@ class TicketsController
 
             if (isset($data)) {
                 $this->changeTicketStatus($data);
+            }
+        }
+
+        // add ticket
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["subject-addTicket"])) {
+            $data = [
+                "name" => $_POST["subject-addTicket"],
+                "requester" => $_POST["user-addTicket"],
+                "status" => $_POST["status-addTicket"],
+                "type" => $_POST["type-addTicket"],
+                "requested" => $_POST["date-addTicket"],
+            ];
+            if (!empty($data)) {
+                $this->addTicket($data);
             }
         }
     }
@@ -145,6 +159,27 @@ class TicketsController
             ]);
         } catch (\Throwable $th) {
             echo "błąd przy zmianie statusu zgloszenia" . $th->getMessage();
+        }
+    }
+
+    private function addTicket(array $data): void
+    {
+        $pdo = $this->requestController->connect();
+
+        try {
+            $stm = $pdo->prepare("INSERT INTO tickets (name, requester, status, type, requested) VALUES (:name, :requester, :status, :type, :requested)");
+            $stm->execute([
+                ':name' => $data['name'],
+                ':requester' => $data['requester'],
+                ':status' => $data['status'],
+                ':type' => $data['type'],
+                ':requested' => $data['requested']
+            ]);
+
+            header("Location: /?route=tickets");
+            exit();
+        } catch (\Throwable $th) {
+            echo "błąd prz dodawaniu nowego zgłoszenia: " . $th->getMessage();
         }
     }
 }
