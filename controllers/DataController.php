@@ -141,4 +141,16 @@ class DataController
             return $count;
         } else return $count = 0;
     }
+
+    public function search($table, $dbItemName, $phrase): array
+    {
+        $searchPhrase = "%$phrase%";
+
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("SELECT * FROM $table WHERE $dbItemName LIKE :phrase ");
+        $stm->bindParam(":phrase", $searchPhrase);
+        $stm->execute();
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

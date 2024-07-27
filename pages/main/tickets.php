@@ -7,6 +7,17 @@ $dataController = new DataController();
 $ticketController = new TicketsController();
 
 $tickets = $dataController->downloadTicketsData();
+
+// search
+if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
+    $data = $dataController->search("tickets", "name", $_POST["search"]);
+    $tickets = $data;
+    $data = [];
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +34,7 @@ $tickets = $dataController->downloadTicketsData();
         <br><br>
 
         <form class="d-flex gap-2" method="post">
-            <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
+            <input name="search" class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
             <button class="btn btn-subtle bg-dark" type="submit">
                 <i class="bi bi-search text-light"></i>
             </button>

@@ -62,7 +62,7 @@ class TicketsController
         }
 
         // add ticket
-        if ($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["subject-addTicket"])) {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["subject-addTicket"])) {
             $data = [
                 "name" => $_POST["subject-addTicket"],
                 "requester" => $_POST["user-addTicket"],
