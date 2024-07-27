@@ -7,7 +7,6 @@ namespace Controllers;
 use Controllers\RequestController;
 use Exceptions\CountAllTicketsException;
 use Exceptions\DatabaseException;
-use Exceptions\DownloadTicketDataException;
 use Exceptions\DownloadUsersDataException;
 use Exceptions\DownloadTicketsDataException;
 use Exceptions\GetTicketTypesException;
@@ -79,8 +78,9 @@ class DataController
             } else {
                 throw new DownloadTicketsDataException();
             }
-        } catch (DownloadTicketDataException $e) {
+        } catch (DownloadTicketsDataException $e) {
             echo $e->getMessage();
+            return [];
         }
     }
 
@@ -109,6 +109,7 @@ class DataController
             } else throw new GetTicketTypesException();
         } catch (GetTicketTypesException $e) {
             echo $e->getMessage();
+            return $data = ["INNE" => 0, "SPRZET" => 0, "INTERNET" => 0];
         }
     }
 
@@ -125,22 +126,19 @@ class DataController
             } else throw new CountAllTicketsException();
         } catch (CountAllTicketsException $e) {
             echo $e->getMessage();
+            return $count = 0;
         }
     }
 
     public function countClosedTickets(): int
     {
-        try {
-            $pdo = $this->requestController->connect();
-            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE status='Zamknięte'");
-            $stm->execute();
-            $count = $stm->fetchColumn();
+        $pdo = $this->requestController->connect();
+        $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE status='Zamknięte'");
+        $stm->execute();
+        $count = $stm->fetchColumn();
 
-            if ($count > 0) {
-                return $count;
-            } else throw new CountAllTicketsException();
-        } catch (CountAllTicketsException $e) {
-            echo $e->getMessage();
-        }
+        if ($count > 0) {
+            return $count;
+        } else return $count = 0;
     }
 }

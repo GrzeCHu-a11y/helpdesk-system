@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 use Controllers\TicketsController;
 
-require_once 'controllers/TicketsController.php';
-
 $ticketController = new TicketsController();
-
 
 // Download ticketID from GET
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -15,7 +12,6 @@ $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 // Download ticket data and messages
 $ticketData = $ticketController->downloadTicketData($id);
 $ticketMessages = $ticketController->downloadTicketMessages($id);
-
 ?>
 
 <!DOCTYPE html>
