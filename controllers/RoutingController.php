@@ -35,53 +35,25 @@ class RoutingController
 
             switch ($currPage) {
                 case 'login':
-                    $currPage = "login";
-                    $controller = new LoginController();
-                    $this->view->render($currPage, []);
+                    $this->login();
                     break;
                 case 'register':
-                    $currPage = "register";
-                    $controller = new RegisterController();
-                    $this->view->render($currPage, []);
+                    $this->register();
                     break;
                 case 'dashboard':
-                    $currPage = "dashboard";
-                    $controller = new DashboardController();
-                    $this->view->render($currPage, []);
+                    $this->dashboard();
                     break;
                 case 'tickets':
-                    $currPage = "tickets";
-                    $controller = new TicketsController();
-                    $dataController = new DataController();
-
-                    // search and download data
-                    if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
-                        $data = $dataController->search("tickets", "name", $_POST["search"]);
-                        $this->view->render($currPage, $data);
-                    } else {
-                        $data = $dataController->downloadTicketsData();
-                        $this->view->render($currPage, $data);
-                    }
-
-
+                    $this->tickets();
                     break;
                 case 'ticket':
-                    $currPage = "ticket";
-                    $controller = new TicketsController();
-                    $this->view->render($currPage, []);
+                    $this->ticket();
                     break;
                 case 'team':
-                    $currPage = "team";
-                    $controller = new DataController();
-                    $data = $controller->downloadUsersData();
-                    $this->view->render($currPage, $data);
+                    $this->team();
                     break;
                 case 'worktime':
-                    $currPage = "worktime";
-                    $controller = new WorktimeController();
-                    $dataController = new DataController();
-                    $data = $dataController->downloadWorktimeData();
-                    $this->view->render($currPage, $data);
+                    $this->worktime();
                     break;
 
                 default:
@@ -91,6 +63,70 @@ class RoutingController
             }
         }
     }
+
+    // Functions for routing
+    private function login(): void
+    {
+        $currPage = "login";
+        $Logincontroller = new LoginController();
+        $this->view->render($currPage, []);
+    }
+
+    private function register(): void
+    {
+        $currPage = "register";
+        $Registercontroller = new RegisterController();
+        $this->view->render($currPage, []);
+    }
+
+    private function dashboard(): void
+    {
+        $currPage = "dashboard";
+        $controller = new DashboardController();
+        $this->view->render($currPage, []);
+    }
+
+    private function tickets(): void
+    {
+        $currPage = "tickets";
+        $ticketsController = new TicketsController();
+        $dataController = new DataController();
+
+        // search and download data
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
+            $tickets = $dataController->search("tickets", "name", $_POST["search"]);
+            $this->view->render($currPage, $tickets);
+        } else {
+            $tickets = $dataController->downloadTicketsData();
+            $this->view->render($currPage, $tickets);
+        }
+    }
+
+    private function ticket(): void
+    {
+        $currPage = "ticket";
+        $ticketsController = new TicketsController();
+        $this->view->render($currPage, []);
+    }
+
+    private function team(): void
+    {
+        $currPage = "team";
+        $dataController = new DataController();
+        $data = $dataController->downloadUsersData();
+        $this->view->render($currPage, $data);
+    }
+
+    private function worktime(): void
+    {
+        $currPage = "worktime";
+        $worktimeController = new WorktimeController();
+        $dataController = new DataController();
+        $data = $dataController->downloadWorktimeData();
+        $this->view->render($currPage, $data);
+    }
+    // Functions for routing
+
 
     private function handleAjaxRequest(): void
     {
