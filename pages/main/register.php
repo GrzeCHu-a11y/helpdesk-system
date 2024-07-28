@@ -1,12 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-use Controllers\RegisterController;
-
-$registerController = new RegisterController();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 

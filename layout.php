@@ -24,7 +24,7 @@ require_once("helpers/asideArray.php");
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
-            <?php if (isset($_SESSION["username"])) : ?>
+            <?php if (isset($_SESSION["USER_DATA"]["username"])) : ?>
                 <a class="navbar-brand" href="/?route=dashboard">
                     <img src="public/logo.png" width=" 70" />
                 </a>
@@ -38,7 +38,7 @@ require_once("helpers/asideArray.php");
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav me-auto">
-                    <?php if (isset($_SESSION["username"])) : ?>
+                    <?php if (isset($_SESSION["USER_DATA"]["username"])) : ?>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/?route=dashboard">Panel</a>
                         </li>
@@ -62,7 +62,7 @@ require_once("helpers/asideArray.php");
                 </div>
             </div>
             <div class="navbar-nav ms-auto">
-                <?php if (isset($_SESSION["username"])) : ?>
+                <?php if (isset($_SESSION["USER_DATA"]["username"])) : ?>
                     <div class="d-flex flex-row gap-4 me-8">
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -88,8 +88,8 @@ require_once("helpers/asideArray.php");
         </div>
     </nav>
 
-    <main class="<?php echo isset($_SESSION["username"]) ? "main" : "main-full"; ?>">
-        <?php if (isset($_SESSION["username"])) : ?>
+    <main class="<?php echo isset($_SESSION["USER_DATA"]["username"]) ? "main" : "main-full"; ?>">
+        <?php if (isset($_SESSION["USER_DATA"]["username"])) : ?>
             <aside class="sidebar">
                 <ul class="list-group border-0" style="width:100%;">
                     <li class="list-group-item">
@@ -102,7 +102,7 @@ require_once("helpers/asideArray.php");
             </aside>
         <?php endif; ?>
 
-        <div class="<?php echo isset($_SESSION["username"]) ? "content" : "content-full"; ?>" id="pagesContent">
+        <div class="<?php echo isset($_SESSION["USER_DATA"]["username"]) ? "content" : "content-full"; ?>" id="pagesContent">
             <?php
             $fileMainPage = "pages/main/$currPage.php";
             $fileSubPage = "pages/sub/$currPage.php";

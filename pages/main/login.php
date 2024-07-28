@@ -1,12 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-use Controllers\LoginController;
-
-$loginController = new LoginController();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -41,7 +41,7 @@ class LoginController
 
         if ($this->validateUser($pdo, $username, $password)) {
             session_start();
-            $_SESSION["username"] = $username;
+            var_dump($_SESSION["USER_DATA"]["username"]);
 
             header("Location: /?route=dashboard");
             exit;
@@ -56,10 +56,11 @@ class LoginController
         $stm->execute(["username" => $username]);
         $user = $stm->fetch();
 
-        //set user data to SESSION
-        $_SESSION["USER_DATA"] = $user;
 
         if ($user && password_verify($password, $user["password"])) {
+            //set user data to SESSION
+            session_start();
+            $_SESSION["USER_DATA"] = $user;
             return true;
         }
 

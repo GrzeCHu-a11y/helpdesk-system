@@ -10,7 +10,7 @@ use Controllers\TicketsController;
 
 class RoutingController
 {
-    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team"];
+    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team", "experimental"];
     const SUB_PAGES_ARRAY = ["ticket"];
     const HOME_PAGE = "home";
     private ViewController $view;
@@ -32,7 +32,49 @@ class RoutingController
         if ($currPage === 'ticket' && isset($_GET['ajax']) && $_GET['ajax'] == '1') {
             $this->handleAjaxRequest();
         } else {
-            $this->view->render($currPage);
+
+            switch ($currPage) {
+                case 'login':
+                    $currPage = "login";
+                    $controller = new LoginController();
+                    $this->view->render($currPage, []);
+                    break;
+                case 'register':
+                    $currPage = "register";
+                    $controller = new RegisterController();
+                    $this->view->render($currPage, []);
+                    break;
+                case 'dashboard':
+                    $currPage = "dashboard";
+                    $controller = new DashboardController();
+                    $this->view->render($currPage, []);
+                    break;
+                case 'tickets':
+                    $currPage = "tickets";
+                    $controller = new TicketsController();
+                    $this->view->render($currPage, []);
+                    break;
+                case 'ticket':
+                    $currPage = "ticket";
+                    $controller = new TicketsController();
+                    $this->view->render($currPage, []);
+                    break;
+                case 'team':
+                    $currPage = "team";
+                    // $controller = new TicketsController();
+                    $this->view->render($currPage, []);
+                    break;
+                case 'worktime':
+                    $currPage = "worktime";
+                    $controller = new WorktimeController();
+                    $this->view->render($currPage, []);
+                    break;
+
+                default:
+                    $currPage = "home";
+                    $this->view->render($currPage, []);
+                    break;
+            }
         }
     }
 

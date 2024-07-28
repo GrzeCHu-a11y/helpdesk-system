@@ -40,7 +40,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
 
 <body>
     <section>
-        <h2>Panel</h2><span><?php echo $_SESSION["username"] ?></span>
+        <h2>Panel</h2><span><?php echo $_SESSION["USER_DATA"]["username"] ?></span>
         <br><br>
 
         <div class="parent">

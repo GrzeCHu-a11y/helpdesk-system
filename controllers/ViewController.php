@@ -6,7 +6,7 @@ namespace Controllers;
 
 class ViewController
 {
-    public function render(string $currPage)
+    public function render(string $currPage, array $viewParams = [])
     {
         require_once("layout.php");
     }
