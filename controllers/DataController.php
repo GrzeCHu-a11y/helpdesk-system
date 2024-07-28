@@ -147,9 +147,10 @@ class DataController
         $searchPhrase = "%$phrase%";
 
         $pdo = $this->requestController->connect();
-        $stm = $pdo->prepare("SELECT * FROM $table WHERE $dbItemName LIKE :phrase ");
-        $stm->bindParam(":phrase", $searchPhrase);
-        $stm->execute();
+        $stm = $pdo->prepare("SELECT * FROM $table WHERE $dbItemName LIKE :phrase");
+        $stm->execute([
+            ":phrase" => $searchPhrase,
+        ]);
 
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
