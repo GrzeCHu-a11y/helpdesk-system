@@ -7,12 +7,11 @@ namespace Controllers;
 use Controllers\RequestController;
 use Controllers\ViewController;
 use Controllers\TicketsController;
+use PagesConfig\PagesSetup;
 
 class RoutingController
 {
-    const PAGES_ARRAY = ["home", "login", "dashboard", "register", "tickets", "worktime", "team", "experimental"];
-    const SUB_PAGES_ARRAY = ["ticket"];
-    const HOME_PAGE = "home";
+
     private ViewController $view;
     private RequestController $request;
     private TicketsController $ticketController;
@@ -27,39 +26,15 @@ class RoutingController
     public function run(): void
     {
         $currRoute = $this->request->getParams();
-        $currPage = $this->determineRoute($currRoute);
 
-        if ($currPage === 'ticket' && isset($_GET['ajax']) && $_GET['ajax'] == '1') {
+        if ($currRoute === 'ticket' && isset($_GET['ajax']) && $_GET['ajax'] == '1') {
             $this->handleAjaxRequest();
         } else {
-
-            switch ($currPage) {
-                case 'login':
-                    $this->login();
-                    break;
-                case 'register':
-                    $this->register();
-                    break;
-                case 'dashboard':
-                    $this->dashboard();
-                    break;
-                case 'tickets':
-                    $this->tickets();
-                    break;
-                case 'ticket':
-                    $this->ticket();
-                    break;
-                case 'team':
-                    $this->team();
-                    break;
-                case 'worktime':
-                    $this->worktime();
-                    break;
-
-                default:
-                    $currPage = "home";
-                    $this->view->render($currPage, []);
-                    break;
+            if (array_key_exists($currRoute, PagesSetup::$pagesArray)) {
+                call_user_func([$this, PagesSetup::$pagesArray[$currRoute]]);
+            } else {
+                $currRoute = "home";
+                $this->view->render($currRoute, []);
             }
         }
     }
@@ -147,11 +122,11 @@ class RoutingController
         exit();
     }
 
-    public function determineRoute(string $currRoute = self::HOME_PAGE): string
-    {
-        if (in_array($currRoute, array_merge(self::PAGES_ARRAY, self::SUB_PAGES_ARRAY))) {
-            return $currRoute;
-        }
-        return self::HOME_PAGE;
-    }
+    // public function determineRoute(string $currRoute = self::HOME_PAGE): string
+    // {
+    //     if (in_array($currRoute, array_merge(self::PAGES_ARRAY, self::SUB_PAGES_ARRAY))) {
+    //         return $currRoute;
+    //     }
+    //     return self::HOME_PAGE;
+    // }
 }

@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'PagesConfig\\' => array($baseDir . '/pagesSetupArray'),
     'Exceptions\\' => array($baseDir . '/exceptions'),
     'Controllers\\' => array($baseDir . '/controllers'),
 );

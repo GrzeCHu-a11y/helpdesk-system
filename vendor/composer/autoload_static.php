@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit8ec23c2f9f79b758fd5f46d390cfc4f9
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PagesConfig\\' => 12,
+        ),
         'E' => 
         array (
             'Exceptions\\' => 11,
@@ -18,6 +22,10 @@ class ComposerStaticInit8ec23c2f9f79b758fd5f46d390cfc4f9
     );
 
     public static $prefixDirsPsr4 = array (
+        'PagesConfig\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/pagesSetupArray',
+        ),
         'Exceptions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/exceptions',
