@@ -52,7 +52,18 @@ class RoutingController
                 case 'tickets':
                     $currPage = "tickets";
                     $controller = new TicketsController();
-                    $this->view->render($currPage, []);
+                    $dataController = new DataController();
+
+                    // search and download data
+                    if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
+                        $data = $dataController->search("tickets", "name", $_POST["search"]);
+                        $this->view->render($currPage, $data);
+                    } else {
+                        $data = $dataController->downloadTicketsData();
+                        $this->view->render($currPage, $data);
+                    }
+
+
                     break;
                 case 'ticket':
                     $currPage = "ticket";
@@ -61,13 +72,16 @@ class RoutingController
                     break;
                 case 'team':
                     $currPage = "team";
-                    // $controller = new TicketsController();
-                    $this->view->render($currPage, []);
+                    $controller = new DataController();
+                    $data = $controller->downloadUsersData();
+                    $this->view->render($currPage, $data);
                     break;
                 case 'worktime':
                     $currPage = "worktime";
                     $controller = new WorktimeController();
-                    $this->view->render($currPage, []);
+                    $dataController = new DataController();
+                    $data = $dataController->downloadWorktimeData();
+                    $this->view->render($currPage, $data);
                     break;
 
                 default:

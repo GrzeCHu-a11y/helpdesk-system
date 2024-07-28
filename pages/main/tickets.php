@@ -1,24 +1,3 @@
-<?php
-
-use Controllers\DataController;
-use Controllers\TicketsController;
-
-$dataController = new DataController();
-$ticketController = new TicketsController();
-
-$tickets = $dataController->downloadTicketsData();
-
-// search
-if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
-    $data = $dataController->search("tickets", "name", $_POST["search"]);
-    $tickets = $data;
-    $data = [];
-}
-
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($tickets)) : ?>
-                    <?php foreach ($tickets as $ticket) : ?>
+                <?php if (!empty($viewParams)) : ?>
+                    <?php foreach ($viewParams as $ticket) : ?>
                         <tr>
                             <th scope="row"><?php echo htmlspecialchars($ticket["id"]) ?></th>
                             <td><?php echo htmlspecialchars($ticket["name"]) ?></td>

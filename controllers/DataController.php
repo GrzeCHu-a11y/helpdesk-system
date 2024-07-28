@@ -19,6 +19,9 @@ class DataController
     public function __construct()
     {
         $this->requestController = new RequestController();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
     }
 
     //download worktime log from database fun

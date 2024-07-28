@@ -1,16 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-use Controllers\WorktimeController;
-use Controllers\DataController;
-
-$worktimeController = new WorktimeController();
-$dataController = new DataController();
-
-$data = $dataController->downloadWorktimeData();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +31,7 @@ $data = $dataController->downloadWorktimeData();
             </thead>
             <tbody>
 
-                <?php foreach ($data as $row) : ?>
+                <?php foreach ($viewParams as $row) : ?>
                     <tr>
                         <th scope="row"><?php echo $row["date"] ?></th>
                         <td><?php echo $row["username"] ?></td>

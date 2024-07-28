@@ -13,6 +13,9 @@ class WorktimeController
 
     public function __construct()
     {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $this->requestController = new RequestController();
         $this->handleAction();
     }
@@ -36,7 +39,7 @@ class WorktimeController
         if (!empty($_POST["registerIn"])) {
 
             $date = (date("Y-m-d"));
-            $username = $_SESSION["username"];
+            $username = $_SESSION["USER_DATA"]["username"];
             $startTime = $_POST["registerIn"];
 
             $params["start"] = $startTime;

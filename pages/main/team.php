@@ -1,10 +1,3 @@
-<?php
-
-use Controllers\DataController;
-
-$dataController = new DataController();
-$users = $dataController->downloadUsersData();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +52,7 @@ $users = $dataController->downloadUsersData();
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <?php foreach ($users as $user) : ?>
+                    <?php foreach ($viewParams as $user) : ?>
                         <tr>
                             <td>
                                 <span class="avatar"><i class="fas fa-user"></i></span>
