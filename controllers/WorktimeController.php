@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Controllers\RequestController;
+use DateTime;
 use PDOException;
 
 class WorktimeController
@@ -36,11 +37,11 @@ class WorktimeController
 
         $params = $_SESSION["PARAMS_FROM_WORK_FORM"];
 
-        if (!empty($_POST["registerIn"])) {
+        if (isset($_POST["registerIn"])) {
 
             $date = (date("Y-m-d"));
             $username = $_SESSION["USER_DATA"]["username"];
-            $startTime = $_POST["registerIn"];
+            $startTime = date("H:i");
 
             $params["start"] = $startTime;
             $params["username"] = $username;
@@ -51,9 +52,9 @@ class WorktimeController
             echo "czas rejestrowany";
         }
 
-        if (!empty($_POST["registerOut"])) {
+        if (isset($_POST["registerOut"])) {
 
-            $outTime = $_POST["registerOut"];
+            $outTime = date("H:i");
             $params["end"] = $outTime;
 
             $_SESSION["PARAMS_FROM_WORK_FORM"] = $params;
@@ -72,9 +73,10 @@ class WorktimeController
             $username = $params["username"];
             $start = $params["start"];
             $end = $params["end"];
+            $sum = $this->calculateTime($start, $end);
 
             $pdo = $this->requestController->connect();
-            $stm = $pdo->prepare("INSERT INTO worktime (user_id, date, username, time_start, time_end) VALUES (:user_id, :date, :username, :time_start, :time_end)");
+            $stm = $pdo->prepare("INSERT INTO worktime (user_id, date, username, time_start, time_end, time_sum) VALUES (:user_id, :date, :username, :time_start, :time_end, :time_sum)");
 
             $stm->execute([
                 ":user_id" => $uid,
@@ -82,6 +84,7 @@ class WorktimeController
                 ":username" => $username,
                 ":time_start" => $start,
                 ":time_end" => $end,
+                ":time_sum" => $sum,
             ]);
 
             echo "dane zapisane";
@@ -90,5 +93,15 @@ class WorktimeController
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    private function calculateTime(string $start, string $end): string
+    {
+        $startTime = DateTime::createFromFormat('H:i', $start);
+        $endTime = DateTime::createFromFormat('H:i', $end);
+
+        $interval = $startTime->diff($endTime);
+
+        return $interval->format('%H:%I');
     }
 }

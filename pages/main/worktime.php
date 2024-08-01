@@ -13,8 +13,8 @@
         <br><br>
         <div class="d-flex flex-row gap-3 align-items-center">
             <form method="post">
-                <button type="submit" id="startBtn" class="btn btn-success" name="registerIn" value="<?php echo date("H:i") ?>">Zarejestruj wejście</button>
-                <button type="submit" id="stopBtn" class="btn btn-danger" name="registerOut" value="<?php echo date("H:i") ?>">Zarejestruj wyjście</button>
+                <button type="submit" id="startBtn" class="btn btn-success" name="registerIn">Zarejestruj wejście</button>
+                <button type="submit" id="stopBtn" class="btn btn-danger" name="registerOut">Zarejestruj wyjście</button>
             </form>
         </div>
         <br>
@@ -37,7 +37,7 @@
                         <td><?php echo $row["username"] ?></td>
                         <td><?php echo $row["time_start"] ?></td>
                         <td><?php echo $row["time_end"] ?></td>
-                        <td>*w budowie*</td>
+                        <td><?php echo $row["time_sum"] ?></td>
                     </tr>
                 <?php endforeach; ?>
 
