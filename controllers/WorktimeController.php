@@ -49,7 +49,7 @@ class WorktimeController
 
             $_SESSION["PARAMS_FROM_WORK_FORM"] = $params;
 
-            echo "czas rejestrowany";
+            $_SESSION["CONSTANT_MESSAGES"] = ["message" => "czas rejestrowany od: ", "start" => "$startTime"];
         }
 
         if (isset($_POST["registerOut"])) {
@@ -87,8 +87,10 @@ class WorktimeController
                 ":time_sum" => $sum,
             ]);
 
-            echo "dane zapisane";
-            //clear session
+            $_SESSION["MESSAGES"] = ["message" => "dane zapisane"];
+
+            //clear session and constatnt messages
+            unset($_SESSION["CONSTANT_MESSAGES"]);
             $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
         } catch (PDOException $e) {
             echo $e->getMessage();

@@ -10,6 +10,23 @@
 <body>
     <section>
         <h2>Rejestracja czasu pracy</h2>
+        <?php if (isset($_SESSION["CONSTANT_MESSAGES"])) : ?>
+            <div class="alert alert-primary" role="alert">
+                <?php echo $_SESSION["CONSTANT_MESSAGES"]["message"], $_SESSION["CONSTANT_MESSAGES"]["start"] ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION["MESSAGES"])) : ?>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION["MESSAGES"]["message"] ?>
+                <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php unset($_SESSION["MESSAGES"]); ?>
+        <?php endif; ?>
+
+
         <br><br>
         <div class="d-flex flex-row gap-3 align-items-center">
             <form method="post">
