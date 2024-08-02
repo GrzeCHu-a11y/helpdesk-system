@@ -40,7 +40,7 @@ class DataController
             if (!empty($data)) {
                 return $data;
             } else {
-                throw new DatabaseException("Nie udało się pobrać danych / czas pracy musi zostać zarejestrowany przynajmniej 1 raz");
+                throw new DatabaseException();
             }
         } catch (DatabaseException $e) {
             echo 'Message: ' . $e->getMessage();
