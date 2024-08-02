@@ -19,8 +19,11 @@ class DashboardController
 
         $issueTypes = [
             'Inne' => $data["INNE"],
-            'Sprzęt' => $data["SPRZET"],
+            'Sprzęt' => $data["SPRZĘT"],
             'Internet' => $data["INTERNET"],
+            'Aplikacja' => $data["APLIKACJA"],
+            'Bezpieczeństwo' => $data["BEZPIECZEŃSTWO"],
+            'Użytkownik' => $data["UŻYTKOWNIK"],
         ];
 
         if (isset($issueTypes)) {

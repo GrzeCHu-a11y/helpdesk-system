@@ -16,7 +16,8 @@
                     <input name="user-addTicket" class="form-control flex-grow-1" type="text" id="user" readonly value="<?php echo htmlspecialchars($_SESSION["USER_DATA"]["username"]) ?>">
                     <div class="form-floating">
                         <select name="status-addTicket" class="form-select" id="floatingSelect-Status" aria-label="Floating label select example">
-                            <option selected>Otwarto</option>
+                            <option selected>Nowo dodane</option>
+                            <option>Otwarto</option>
                             <option>W toku</option>
                             <option>Zamknięte</option>
                             <option>Do ponownej weryfikacji</option>
@@ -28,6 +29,9 @@
                             <option selected>INNE</option>
                             <option>INTERNET</option>
                             <option>SPRZĘT</option>
+                            <option>APLIKACJA</option>
+                            <option>BEZPIECZEŃSTWO</option>
+                            <option>UŻYTKOWNIK</option>
                         </select>
                         <label for="floatingSelect-Type">Podaj typ zgłoszenia</label>
                     </div>

@@ -87,35 +87,6 @@ class DataController
         }
     }
 
-    public function countTicketTypes(): array
-    {
-        $pdo = $this->requestController->connect();
-        $pdo->beginTransaction();
-
-        try {
-            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE type='INNE'");
-            $stm->execute();
-            $countINNE = $stm->fetchColumn();
-
-            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE type='SPRZĘT'");
-            $stm->execute();
-            $countSPRZET = $stm->fetchColumn();
-
-            $stm = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE type='INTERNET'");
-            $stm->execute();
-            $countINTERNET = $stm->fetchColumn();
-
-            $pdo->commit();
-
-            if ($countINNE || $countSPRZET ||  $countINTERNET >= 1) {
-                return $data = ["INNE" => $countINNE, "SPRZET" => $countSPRZET, "INTERNET" => $countINTERNET];
-            } else throw new GetTicketTypesException();
-        } catch (GetTicketTypesException $e) {
-            echo $e->getMessage();
-            return $data = ["INNE" => 0, "SPRZET" => 0, "INTERNET" => 0];
-        }
-    }
-
     public function countAllTickets(): int
     {
         try {
@@ -156,5 +127,39 @@ class DataController
         ]);
 
         return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function countTicketTypes(): array
+    {
+        $pdo = $this->requestController->connect();
+        $pdo->beginTransaction();
+
+        try {
+            $types = ["INNE", "SPRZĘT", "APLIKACJA", "BEZPIECZEŃSTWO", "UŻYTKOWNIK", "INTERNET"];
+            $counts = [];
+
+            $stm = $pdo->prepare("SELECT type, COUNT(*) as count FROM tickets WHERE type IN(?, ?, ?, ? ,?, ?) GROUP BY type");
+            $stm->execute($types);
+
+            $results = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            //reset array
+            foreach ($types as $type) {
+                $counts[$type] = 0;
+            }
+
+            foreach ($results as $row) {
+                $counts[$row["type"]] = $row["count"];
+            }
+
+            $pdo->commit();
+
+            if (array_sum($counts) > 1) {
+                return $counts;
+            } else throw new GetTicketTypesException();
+        } catch (GetTicketTypesException $e) {
+            echo $e->getMessage();
+            return array_fill_keys($counts, 0);
+        }
     }
 }

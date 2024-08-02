@@ -126,12 +126,4 @@ class RoutingController
         }
         exit();
     }
-
-    // public function determineRoute(string $currRoute = self::HOME_PAGE): string
-    // {
-    //     if (in_array($currRoute, array_merge(self::PAGES_ARRAY, self::SUB_PAGES_ARRAY))) {
-    //         return $currRoute;
-    //     }
-    //     return self::HOME_PAGE;
-    // }
 }
