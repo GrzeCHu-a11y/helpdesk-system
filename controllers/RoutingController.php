@@ -88,8 +88,13 @@ class RoutingController
     {
         $currPage = "team";
         $dataController = new DataController();
-        $data = $dataController->downloadUsersData();
-        $this->view->render($currPage, $data);
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST["search"])) {
+            $data = $dataController->search("users", "username", $_POST["search"]);
+            $this->view->render($currPage, $data);
+        } else {
+            $data = $dataController->downloadUsersData();
+            $this->view->render($currPage, $data);
+        }
     }
 
     private function worktime(): void

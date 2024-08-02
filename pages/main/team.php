@@ -12,8 +12,8 @@
         <h2>Członkowie Zespołu</h2>
         <br><br>
 
-        <form class="d-flex gap-2" role="search">
-            <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
+        <form class="d-flex gap-2" role="search" method="post">
+            <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search" name="search">
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <i class="bi bi-gear"></i>
             </button>
