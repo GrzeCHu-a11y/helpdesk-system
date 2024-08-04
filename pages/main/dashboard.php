@@ -57,8 +57,13 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
                 <p>12 min 34s</p>
             </div>
             <div class="div4">
-                <h6>Czas pracy dzisiaj</h6>
-                <p>4h 12m</p>
+                <?php if (isset($_SESSION["PARAMS_FROM_WORK_FORM"])) : ?>
+                    <h6>Zarejstrowano</h6>
+                    <p> <?php echo $_SESSION["PARAMS_FROM_WORK_FORM"]["start"] ?></p>
+                <?php elseif (!isset($_SESSION["PARAMS_FROM_WORK_FORM"])) : ?>
+                    <h6>Zarejestruj czas pracy!</h6>
+                    <p>00:00</p>
+                <?php endif; ?>
             </div>
 
             <div class="div5">

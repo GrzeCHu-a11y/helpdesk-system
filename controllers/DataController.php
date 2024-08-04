@@ -43,7 +43,7 @@ class DataController
                 throw new DatabaseException();
             }
         } catch (DatabaseException $e) {
-            echo 'Message: ' . $e->getMessage();
+            echo $e->getMessage();
             return [];
         }
     }
