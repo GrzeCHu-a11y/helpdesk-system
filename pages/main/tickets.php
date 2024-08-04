@@ -41,6 +41,7 @@
                     <th scope="col">Obsługiwane przez</th>
                     <th scope="col">Otwarto w dniu</th>
                     <th scope="col">Przewidywany czas realizacji</th>
+                    <th scope="col">Priorytet</th>
                     <th scope="col">Opcje</th>
                 </tr>
             </thead>
@@ -57,6 +58,7 @@
                             <td><?php echo htmlspecialchars($ticket["operated_by"] ?? "") ?></td>
                             <td><?php echo htmlspecialchars($ticket["opened_at"] ?? "") ?></td>
                             <td><?php echo htmlspecialchars($ticket["realization_time"] ?? "") ?></td>
+                            <td><?php echo htmlspecialchars($ticket["ticket_priority"] ?? "") ?></td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -53,8 +53,8 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
                 <p><?php echo $numOfClosedTickets ?></p>
             </div>
             <div class="div3">
-                <h6>Sredni czas roziwązywania zgłoszenia</h6>
-                <p>12 min 34s</p>
+                <h6>Średni czas roziwązywania zgłoszenia</h6>
+                <p>00:00</p>
             </div>
             <div class="div4">
                 <?php if (isset($_SESSION["PARAMS_FROM_WORK_FORM"])) : ?>

@@ -69,6 +69,7 @@ class TicketsController
                 "status" => $_POST["status-addTicket"],
                 "type" => $_POST["type-addTicket"],
                 "requested" => $_POST["date-addTicket"],
+                "priority" => $_POST["priority-addTicket"]
             ];
             if (!empty($data)) {
                 $this->addTicket($data);
@@ -167,13 +168,14 @@ class TicketsController
         $pdo = $this->requestController->connect();
 
         try {
-            $stm = $pdo->prepare("INSERT INTO tickets (name, requester, status, type, requested) VALUES (:name, :requester, :status, :type, :requested)");
+            $stm = $pdo->prepare("INSERT INTO tickets (name, requester, status, type, requested, ticket_priority) VALUES (:name, :requester, :status, :type, :requested, :priority)");
             $stm->execute([
                 ':name' => $data['name'],
                 ':requester' => $data['requester'],
                 ':status' => $data['status'],
                 ':type' => $data['type'],
-                ':requested' => $data['requested']
+                ':requested' => $data['requested'],
+                ':priority' => $data['priority'],
             ]);
 
             header("Location: /?route=tickets");

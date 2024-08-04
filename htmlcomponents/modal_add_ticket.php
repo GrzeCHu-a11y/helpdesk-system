@@ -22,7 +22,7 @@
                             <option>Zamknięte</option>
                             <option>Do ponownej weryfikacji</option>
                         </select>
-                        <label for="floatingSelect-Status">Podaj status zgłoszenia</label>
+                        <label for="floatingSelect-Status">status zgłoszenia</label>
                     </div>
                     <div class="form-floating">
                         <select name="type-addTicket" class="form-select" id="floatingSelect-Type" aria-label="Floating label select example">
@@ -33,7 +33,15 @@
                             <option>BEZPIECZEŃSTWO</option>
                             <option>UŻYTKOWNIK</option>
                         </select>
-                        <label for="floatingSelect-Type">Podaj typ zgłoszenia</label>
+                        <label for="floatingSelect-Type">typ zgłoszenia</label>
+                    </div>
+                    <div class="form-floating">
+                        <select name="priority-addTicket" class="form-select" id="floatingSelect-Type" aria-label="Floating label select example">
+                            <option selected>NISKI</option>
+                            <option>WYSOKI</option>
+                            <option>ŚREDNI</option>
+                        </select>
+                        <label for="floatingSelect-Type">priorytet zgłoszenia</label>
                     </div>
                 </div>
             </div>
