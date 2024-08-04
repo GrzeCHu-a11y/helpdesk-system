@@ -1,33 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-use Controllers\DashboardController;
-use Controllers\DataController;
-
-$dashboardController = new DashboardController();
-$issueTypes = $dashboardController->issuesChartManagement();
-
-$dataController = new DataController();
-$numOfAllTickets = $dataController->countAllTickets();
-$numOfClosedTickets =  $dataController->countClosedTickets();
-
-//IN PROGRES
-$ticketsResolved = [
-    'Poniedziałek' => 5,
-    'Wtorek' => 8,
-    'Środa' => 6,
-    'Czwartek' => 7,
-    'Piątek' => 4,
-];
-
-$ticketsDataJson = json_encode(array_values($ticketsResolved));
-$ticketsLabelsJson = json_encode(array_keys($ticketsResolved));
-//IN PROGRES
-
-$issueDataJson = json_encode(array_values($issueTypes));
-$issueLabelsJson = json_encode(array_keys($issueTypes));
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,11 +16,11 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
         <div class="parent">
             <div class="div1">
                 <h6>Aktywne zgłoszenia</h6>
-                <p><?php echo $numOfAllTickets ?></p>
+                <p><?php echo $viewParams["numOfAllTickets"] ?></p>
             </div>
             <div class="div2">
                 <h6>Zamknięte zgłoszenia</h6>
-                <p><?php echo $numOfClosedTickets ?></p>
+                <p><?php echo $viewParams["numOfClosedTickets"] ?></p>
             </div>
             <div class="div3">
                 <h6>Średni czas roziwązywania zgłoszenia</h6>
@@ -68,7 +38,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
 
             <div class="div5">
                 <div class="chart-container">
-                    <h6 class="text-center">Zamknięte zgłoszenia w Tygodniu *W BUDOWIE*</h6>
+                    <h6 class="text-center">Statusy zgłoszeń</h6>
                     <canvas id="ticketsChart"></canvas>
                 </div>
             </div>
@@ -82,10 +52,10 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
 
     </section>
     <script>
-        const ticketsData = <?php echo $ticketsDataJson; ?>;
-        const ticketsLabels = <?php echo $ticketsLabelsJson; ?>;
-        const issueData = <?php echo $issueDataJson; ?>;
-        const issueLabels = <?php echo $issueLabelsJson; ?>;
+        const ticketsData = <?php echo $viewParams["ticketPriorityData"]["values"]; ?>;
+        const ticketsLabels = <?php echo $viewParams["ticketPriorityData"]["labels"]; ?>;
+        const issueData = <?php echo $viewParams["ticketIssuesData"]['values']; ?>;
+        const issueLabels = <?php echo $viewParams["ticketIssuesData"]['labels']; ?>;
 
         // Konfiguracja wykresu słupkowego
         const ticketsCtx = document.getElementById('ticketsChart').getContext('2d');
@@ -94,7 +64,7 @@ $issueLabelsJson = json_encode(array_keys($issueTypes));
             data: {
                 labels: ticketsLabels,
                 datasets: [{
-                    label: 'Zamknięte zgłoszenia',
+                    label: 'Statusy zgłoszeń',
                     data: ticketsData,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',

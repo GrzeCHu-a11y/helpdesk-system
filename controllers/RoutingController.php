@@ -57,8 +57,24 @@ class RoutingController
     private function dashboard(): void
     {
         $currPage = "dashboard";
-        $controller = new DashboardController();
-        $this->view->render($currPage, []);
+        $dashboardController = new DashboardController();
+        $dataController = new DataController();
+
+        $numOfAllTickets = $dataController->countAllTickets();
+        $numOfClosedTickets =  $dataController->countClosedTickets();
+
+        $ticketPriorityData = $dashboardController->ticketPriorityChartManagment();
+        $ticketIssuesData = $dashboardController->issuesChartManagement();
+
+        $this->view->render(
+            $currPage,
+            [
+                "ticketPriorityData" => $ticketPriorityData,
+                "ticketIssuesData" => $ticketIssuesData,
+                "numOfAllTickets" => $numOfAllTickets,
+                "numOfClosedTickets" => $numOfClosedTickets,
+            ]
+        );
     }
 
     private function tickets(): void

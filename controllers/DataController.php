@@ -19,6 +19,7 @@ class DataController
     public function __construct()
     {
         $this->requestController = new RequestController();
+        $this->countTicketPriority();
         if (!isset($_SESSION)) {
             session_start();
         }
@@ -160,6 +161,38 @@ class DataController
         } catch (GetTicketTypesException $e) {
             echo $e->getMessage();
             return array_fill_keys($counts, 0);
+        }
+    }
+
+    public function countTicketPriority(): array
+    {
+        $types = ["NISKI", "ŚREDNI", "WYSOKI"];
+        $counts = [];
+        try {
+            $pdo = $this->requestController->connect();
+            $pdo->beginTransaction();
+
+            $query = "SELECT ticket_priority, COUNT(*) as count FROM tickets WHERE ticket_priority IN(?, ?, ?) GROUP BY ticket_priority";
+            $stm = $pdo->prepare($query);
+            $stm->execute($types);
+
+            foreach ($types as $type) {
+                $counts[$type] = 0;
+            }
+
+            $results = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($results as $row) {
+                $counts[$row["ticket_priority"]] = $row["count"];
+            }
+
+            $pdo->commit();
+
+            if ($results > 1) {
+                return $counts;
+            } else throw new CountAllTicketsException();
+        } catch (CountAllTicketsException $e) {
+            echo $e->getMessage();
         }
     }
 }

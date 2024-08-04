@@ -27,7 +27,28 @@ class DashboardController
         ];
 
         if (isset($issueTypes)) {
-            return $issueTypes;
+            $issueDataJson = json_encode(array_values($issueTypes));
+            $issueLabelsJson = json_encode(array_keys($issueTypes));
+
+            return ["values" => $issueDataJson, "labels" => $issueLabelsJson];
+        }
+    }
+
+    public function ticketPriorityChartManagment(): array
+    {
+        $data = $this->dataController->countTicketPriority();
+
+        $ticketsPriority = [
+            'Niski' => $data["NISKI"],
+            'Średni' => $data["ŚREDNI"],
+            'Wysoki' => $data["WYSOKI"],
+        ];
+
+        if (isset($ticketsPriority)) {
+            $ticketsPriorityDataJson = json_encode(array_values($ticketsPriority));
+            $ticketsPriorityLabelsJson = json_encode(array_keys($ticketsPriority));
+
+            return ["values" => $ticketsPriorityDataJson, "labels" => $ticketsPriorityLabelsJson];
         }
     }
 }
