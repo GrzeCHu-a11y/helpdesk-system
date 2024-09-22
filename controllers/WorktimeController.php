@@ -91,7 +91,8 @@ class WorktimeController
 
             //clear session and constatnt messages
             unset($_SESSION["CONSTANT_MESSAGES"]);
-            $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
+            unset($_SESSION["PARAMS_FROM_WORK_FORM"]);
+            // $_SESSION["PARAMS_FROM_WORK_FORM"] = ["date" => "", "username" => "", "start" => "", "end" => ""];
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

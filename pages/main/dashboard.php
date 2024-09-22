@@ -38,7 +38,7 @@
 
             <div class="div5">
                 <div class="chart-container">
-                    <h6 class="text-center">Statusy zgłoszeń</h6>
+                    <h6 class="text-center">Priorytety Zgłoszeń</h6>
                     <canvas id="ticketsChart"></canvas>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             data: {
                 labels: ticketsLabels,
                 datasets: [{
-                    label: 'Statusy zgłoszeń',
+                    label: 'Priorytety Zgłoszeń',
                     data: ticketsData,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',

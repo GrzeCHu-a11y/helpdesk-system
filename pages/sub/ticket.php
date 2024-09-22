@@ -108,7 +108,7 @@ $ticketMessages = $ticketController->downloadTicketMessages($id);
     <form method="post">
         <textarea class="form-control" id="textAreaExample" rows="3" placeholder="Add a message here" name="message"></textarea>
 
-        <div class="input-group">
+        <div class="input-group mt-2">
             <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
             <button class="btn btn-dark" type="submit" id="inputGroupFileAddon04">Wyślij</button>
         </div>

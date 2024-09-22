@@ -28,11 +28,11 @@ require_once("helpers/asideArray.php");
         <div class="container-fluid">
             <?php if (isset($_SESSION["USER_DATA"]["username"])) : ?>
                 <a class="navbar-brand" href="/?route=dashboard">
-                    <img src="public/logo.png" width=" 70" />
+                    <img src="public/logo.png" width=" 80" />
                 </a>
             <?php else : ?>
                 <a class="navbar-brand" href="/">
-                    <img src="public/logo.png" width=" 70" />
+                    <img src="public/logo.png" width=" 80" />
                 </a>
             <?php endif; ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@ require_once("helpers/asideArray.php");
                     <div class="d-flex flex-row gap-4 me-8">
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://images.unsplash.com/photo-1593529467220-9d721ceb9a78?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <i class="bi bi-person-circle" style="font-size: 1.5rem; margin-right: 4px;"></i>
                                 <strong><?php echo htmlspecialchars($_SESSION["USER_DATA"]["username"], ENT_QUOTES); ?></strong>
                             </a>
                             <ul class="dropdown-menu text-small shadow">
