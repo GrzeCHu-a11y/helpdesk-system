@@ -1,0 +1,9 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "controllers/",
+            "PagesConfig\\": "pagesSetupArray/",
+            "Exceptions\\": "exceptions/"
+        }
+    }
+}

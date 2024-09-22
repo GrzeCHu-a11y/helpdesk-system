@@ -1,5 +1,78 @@
 body {
+    height: auto;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    background-color: rgb(249, 249, 249);
+    /* font-family: Arial, sans-serif; */
 }
+
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin-top: 5vh;
+}
+
+.main-full {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin-top: 10vh;
+    padding: 2%;
+}
+
+.sidebar {
+    background-color: white;
+    width: 15%;
+    border-style: solid;
+    border-color: rgb(227, 227, 227);
+    border-width: 0 0.2px 0 0;
+    padding: 20px;
+    padding-top: 10vh;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+}
+
+
+.content {
+    width: 85%;
+    padding: 30px;
+    margin-left: 15%;
+}
+
+.content-full {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.div1, .div2, .div3, .div4 {
+    border: 0.4px solid rgb(211, 211, 211);
+    padding: 10px;
+    background-color: white;
+}
+
+.div5, .div6 {
+    background-color: white;
+    grid-column: span 2;
+    border: 0.4px solid rgb(211, 211, 211);
+    padding: 10px;
+    height: 400px; /* Dostosowanie wysokości wykresów */
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+}
+
